@@ -1,13 +1,14 @@
 //#include "SDL.h"
-#include "Engine.h"
-
-
-
+#include "engine/core/Engine.h"
+#include "engine/core/EngineBuilder.h"
 
 int main()
 {
-    PingPong::Engine engine("PingPong", 640, 480);
-    if (!engine.init()) return -1;
+    Engine::Engine engine;
+    Engine::Builder::EngineBuilder engineBuilder;
+    engineBuilder.setWindow("Pong Game", 640, 480);
+
+    if (!engineBuilder.build()) return 1;
     engine.run();
     return 0;
 }
