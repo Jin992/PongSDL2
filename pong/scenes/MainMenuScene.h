@@ -17,10 +17,6 @@ namespace PongGame {
         MainMenuScene();
         void render(Engine::Renderer::engine_renderer &) override;
         void update() override ;
-        void onClickDown(SDL_KeyboardEvent &event) override {if (event.timestamp) {}}
-        void onClickUp(SDL_KeyboardEvent &event) override {if (event.timestamp) {}}
-        void onKeyPressDown(SDL_KeyboardEvent &event) override {if (event.timestamp) {}}
-        void onKeyPressUp(SDL_KeyboardEvent &event) override {if (event.timestamp) {}}
 
         ~MainMenuScene() = default;
 

@@ -18,7 +18,7 @@ add_executable(PongSDL2 main.cpp
         engine/entity/Entity.cpp
                         engine/core/EngineData.cpp
                         engine/core/EngineBuilder.cpp
-                        engine/scene/SceneManager.cpp pong/scenes/MainMenuScene.cpp pong/scenes/MainMenuScene.h engine/window/Window.cpp engine/window/Window.h engine/renderer/Renderer.cpp engine/renderer/Renderer.h engine/error/EngineError.cpp engine/error/EngineError.h engine/TTFFont.cpp engine/TTFFont.h pong/UI/TextButton.cpp pong/UI/TextButton.h engine/ui/Button.cpp engine/ui/Button.h)
+                        engine/scene/SceneManager.cpp pong/scenes/MainMenuScene.cpp pong/scenes/MainMenuScene.h engine/window/Window.cpp engine/window/Window.h engine/renderer/Renderer.cpp engine/renderer/Renderer.h engine/error/EngineError.cpp engine/error/EngineError.h engine/TTFFont.cpp engine/TTFFont.h pong/UI/TextButton.cpp pong/UI/TextButton.h engine/ui/Button.cpp engine/ui/Button.h engine/iface/IPressObject.h engine/iface/IEngineObject.h)
 
 #string trailing whitespaces
 target_link_libraries(PongSDL2 SDL2::Main SDL2::TTF SDL2::Image SDL2::Mixer)

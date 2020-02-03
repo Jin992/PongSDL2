@@ -7,18 +7,14 @@
 
 #include <memory>
 #include <renderer/Renderer.h>
+#include <IEngineObject.h>
 
 namespace Engine {
-    class IRendererObject {
+    class IRendererObject: public IEngineObject {
     public:
         virtual void render(Renderer::engine_renderer &) = 0;
         virtual void update() = 0;
-        virtual void onClickDown(SDL_KeyboardEvent &event) = 0;
-        virtual void onClickUp(SDL_KeyboardEvent &event) = 0;
-        virtual void onKeyPressDown(SDL_KeyboardEvent &event) = 0;
-        virtual void onKeyPressUp(SDL_KeyboardEvent &event) = 0;
         virtual ~IRendererObject() = default;
-
     };
 }
 

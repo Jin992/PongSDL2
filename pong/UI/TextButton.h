@@ -15,10 +15,6 @@ namespace PongGame {
             TextButton(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
             void init(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
             void update() override;
-            void onClickDown(SDL_KeyboardEvent &event) override {if (event.timestamp) {}}
-            void onClickUp(SDL_KeyboardEvent &event) override {if (event.timestamp) {}}
-            void onKeyPressDown(SDL_KeyboardEvent &event) override {if (event.timestamp) {}}
-            void onKeyPressUp(SDL_KeyboardEvent &event) override {if (event.timestamp) {}}
 
         private:
             std::string                _btn_text;
