@@ -14,15 +14,15 @@ namespace Engine{
             return INSTANCE;
         }
 
-        engine_window_p &EngineData::window() {
+        Window::Window &EngineData::window() {
             return _window;
         }
 
-        engine_renderer_p &EngineData::renderer() {
+        Renderer::Renderer &EngineData::renderer() {
             return _renderer;
         }
 
-        engine_font_p &EngineData::font() {
+        Font::TTFFont &EngineData::font() {
             return _font;
         }
 

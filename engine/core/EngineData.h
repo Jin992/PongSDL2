@@ -6,16 +6,16 @@
 #define PONGSDL2_ENGINEDATA_H
 
 #include <memory>
-#include "SDLDestroyer.h"
-#include "../scene/SceneManager.h"
+#include <core/SDLDestroyer.h>
+#include <scene/SceneManager.h>
+#include <window/Window.h>
+#include <renderer/Renderer.h>
+#include <TTFFont.h>
 
-struct SDL_Window;
-struct _TTF_Font;
 
 namespace Engine {
     namespace EngineData {
-        typedef std::unique_ptr<SDL_Window, SDLDestroyer>   engine_window_p;
-        typedef std::unique_ptr<SDL_Renderer, SDLDestroyer> engine_renderer_p;
+
         typedef std::unique_ptr<_TTF_Font, SDLDestroyer>    engine_font_p;
 
         enum BuildState{
@@ -29,9 +29,9 @@ namespace Engine {
             void operator=(EngineData const &) = delete;
 
             static EngineData   &instance();
-            engine_window_p     &window();
-            engine_renderer_p   &renderer();
-            engine_font_p       &font();
+            Window::Window      &window();
+            Renderer::Renderer  &renderer();
+            Font::TTFFont       &font();
             Scene::SceneManager &sceneManager();
 
             /// retun true if EngineData has been inited
@@ -43,9 +43,9 @@ namespace Engine {
 
         private:
             BuildState          _state;
-            engine_window_p     _window;
-            engine_renderer_p   _renderer;
-            engine_font_p       _font;
+            Window::Window      _window;
+            Renderer::Renderer  _renderer;
+            Font::TTFFont       _font;
             Scene::SceneManager _scene_manager;
         };
     }

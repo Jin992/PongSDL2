@@ -6,14 +6,19 @@
 #define PONGSDL2_IRENDEREROBJECT_H
 
 #include <memory>
-
-class SDL_Renderer;
+#include <renderer/Renderer.h>
 
 namespace Engine {
     class IRendererObject {
     public:
-        virtual void render(std::unique_ptr<SDL_Renderer> &) = 0;
+        virtual void render(Renderer::engine_renderer &) = 0;
         virtual void update() = 0;
+        virtual void onClickDown(SDL_KeyboardEvent &event) = 0;
+        virtual void onClickUp(SDL_KeyboardEvent &event) = 0;
+        virtual void onKeyPressDown(SDL_KeyboardEvent &event) = 0;
+        virtual void onKeyPressUp(SDL_KeyboardEvent &event) = 0;
+        virtual ~IRendererObject() = default;
+
     };
 }
 

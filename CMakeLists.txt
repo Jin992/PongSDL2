@@ -8,15 +8,17 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_ttf REQUIRED)
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
+
+include_directories(${PROJECT_SOURCE_DIR}/engine)
 
 add_executable(PongSDL2 main.cpp
                         engine/core/Engine.cpp
-                        engine/scene/Scene.cpp
-        engine/Point.cpp
-                        engine/entity/Entity.cpp
+        engine/entity/Entity.cpp
                         engine/core/EngineData.cpp
                         engine/core/EngineBuilder.cpp
-                        engine/scene/SceneManager.cpp MainMenuScene.cpp MainMenuScene.h)
+                        engine/scene/SceneManager.cpp pong/scenes/MainMenuScene.cpp pong/scenes/MainMenuScene.h engine/window/Window.cpp engine/window/Window.h engine/renderer/Renderer.cpp engine/renderer/Renderer.h engine/error/EngineError.cpp engine/error/EngineError.h engine/TTFFont.cpp engine/TTFFont.h pong/UI/TextButton.cpp pong/UI/TextButton.h engine/ui/Button.cpp engine/ui/Button.h)
 
 #string trailing whitespaces
-target_link_libraries(PongSDL2 SDL2::Main SDL2::TTF)
+target_link_libraries(PongSDL2 SDL2::Main SDL2::TTF SDL2::Image SDL2::Mixer)

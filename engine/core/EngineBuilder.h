@@ -6,7 +6,8 @@
 #define PONGSDL2_ENGINEBUILDER_H
 
 #include <string>
-#include "EngineData.h"
+#include <core/EngineData.h>
+#include <error/EngineError.h>
 
 namespace Engine {
     namespace Builder {
@@ -16,26 +17,20 @@ namespace Engine {
 
             void setWindow(std::string const &title, uint32_t width, uint32_t height);
             void setRendererFPS(uint16_t fps);
+            void setFont(std::string const &, uint16_t);
 
-            void addScene(std::string const &, Scene::engine_scene_p, std::string &);
+            void addScene(std::string const &,  Scene::engine_scene_ptr scene, std::string &);
             void loadScene(std::string const&, std::string &);
             void startup_scene(std::string const &, std::string &);
-
-
-            bool build();
+            bool build(Error::EngineError &err);
 
         private:
-            bool _init_sdl();
-            bool _sdl();
-            bool _ttf();
-            bool _build_window(EngineData::EngineData &data);
-            bool _build_renderer(EngineData::EngineData &data);
-            bool _build_font(EngineData::EngineData &data);
+            bool _init_sdl(Error::EngineError &);
+            bool _sdl(Error::EngineError &);
+            bool _ttf(Error::EngineError &);
 
         private:
-            std::string _window_title;
-            uint32_t    _window_width;
-            uint32_t    _window_height;
+            EngineData::EngineData &_data;
             uint16_t    _render_fps;
 
         };

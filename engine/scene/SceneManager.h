@@ -7,6 +7,7 @@
 
 #include <map>
 #include "Scene.h"
+#include <error/EngineError.h>
 
 namespace Engine {
     namespace Scene {
@@ -15,16 +16,16 @@ namespace Engine {
             SceneManager();
 
             void            startup_scene(std::string const &scene_name, std::string &err);
-            void            add_scene(std::string const &scene_name, engine_scene_p scene, std::string &err);
+            void            add_scene(std::string const &scene_name, engine_scene_ptr scene, std::string &err);
             void            load_scene(std::string const &, std::string &);
             uint64_t        scenes_qnt();
             bool            startup_scene();
-            engine_scene_p  current_scene(std::string &);
+            engine_scene_ptr current_scene(Error::EngineError &);
 
         private:
-            std::map<std::string, engine_scene_p>   _scenes;
-            engine_scene_p                          _cur_scene;
-            bool                                    _init_scene;
+            std::map<std::string, engine_scene_ptr>  _scenes;
+            engine_scene_ptr                         _cur_scene;
+            bool                                     _init_scene;
         };
     }
 }

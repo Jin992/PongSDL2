@@ -23,6 +23,14 @@ namespace Engine {
             TTF_CloseFont(ptr);
             TTF_Quit();
         }
+
+        void operator() (SDL_Surface *ptr) const {
+            SDL_FreeSurface(ptr);
+        }
+
+        void operator()(SDL_Texture *ptr) const {
+            SDL_DestroyTexture(ptr);
+        }
     };
 }
 
