@@ -34,17 +34,8 @@ namespace Engine {
                _h = h;
             }
 
-            void render(Renderer::engine_renderer &renderer) {
-                _render_self(renderer);
-            }
-
-            engine_texture texture() {
-                return _texture;
-            }
-
-            void texture(engine_texture texture) {
-                _texture = texture;
-            }
+            //void render(Renderer::engine_renderer &renderer) override {
+            //}
 
             bool visible() const {
                 return _visible;
@@ -62,21 +53,31 @@ namespace Engine {
                 return _y;
             }
 
-        protected:
-            void _render_self(Renderer::engine_renderer &renderer){
-                SDL_Rect rect{_x, _y, _w, _h};
-                SDL_QueryTexture(_texture.get(), nullptr, nullptr, &rect.w, &rect.h);
-                rect.x -= rect.w / 2;
-                SDL_RenderCopy(renderer.get(), _texture.get(), nullptr, &rect);
+            int32_t w() const {
+                return _w;
             }
 
+            int32_t h() const {
+                return _h;
+            }
+
+            int32_t entity_color() const {
+                return _color;
+            }
+
+            void entity_color(int32_t v) {
+                _color = v;
+            }
+
+
+
         private:
-            engine_texture          _texture;
             int32_t                 _x;
             int32_t                 _y;
             int32_t                 _w;
             int32_t                 _h;
             bool                    _visible;
+            int32_t                 _color;
         };
     }
 }

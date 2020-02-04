@@ -12,6 +12,7 @@ namespace Engine {
 	class IPressObject {
     public:
         virtual ~IPressObject() = 0;
+
 		void onKeyPressDown(SDL_KeyboardEvent &event){
 		    if (_pressDown != nullptr) _pressDown(event);
 		    else throw std::string(__FUNCTION__ ) + std::string( " uninitialized handler.");
@@ -34,7 +35,7 @@ namespace Engine {
         }
 
     private:
-	    bool _status;
+	    bool            _status;
         engine_key_hdl _pressDown;
         engine_key_hdl _pressUp;
 

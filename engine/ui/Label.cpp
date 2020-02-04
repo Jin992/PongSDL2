@@ -5,9 +5,10 @@
 #include "Label.h"
 namespace Engine {
     namespace ui {
-        Label::Label() : _btn_text("Undefined"), _color(-1) {
+        Label::Label() : _btn_text("Undefined") {
+            entity_color(0xffffff);
             type(IEngineObject::Static);
-            init(_btn_text, _color, 0, 0);
+            init(_btn_text, entity_color(), 0, 0);
         }
 
         Label::Label(std::string const &btn_text, int32_t color, int32_t x, int32_t y) {
@@ -19,20 +20,20 @@ namespace Engine {
         void Label::init(std::string const &btn_text, int32_t color, int32_t x, int32_t y) {
             Engine::Error::EngineError err;
             _btn_text = btn_text;
-            _color = color;
+            entity_color(color);
             init_entity(x, y);
 
-            texture(font().createText(_btn_text, _color, err));
+            _texture = font().createText(_btn_text, entity_color(), err);
         }
 
         void Label::color(int32_t new_color) {
             Engine::Error::EngineError err;
-            _color = new_color;
-            texture(font().createText(_btn_text, new_color, err));
+            entity_color(new_color);
+            _texture = font().createText(_btn_text, new_color, err);
         }
 
         int32_t Label::color() const {
-            return _color;
+            return entity_color();
         }
 
         void Label::update() {

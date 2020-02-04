@@ -10,11 +10,12 @@ namespace Engine {
 	    enum {
 	        Static,
 	        Movable,
-	        Pressable
+	        Pressable,
+	        Collidable
 	    };
 		int64_t	type() const { return _type;}
 		void	type(int64_t v) { _type = v;}
-		virtual ~IEngineObject()=0; // use pure virtual destructor
+		virtual ~IEngineObject() = 0; // use pure virtual destructor
 
 	private:
 		int64_t _type;

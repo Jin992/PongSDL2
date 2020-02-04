@@ -10,6 +10,7 @@
 #include <TTFFont.h>
 #include <renderer/Renderer.h>
 #include "ui/Menu.h"
+#include <ui/Rectangle.h>
 
 
 namespace PongGame {
@@ -23,8 +24,9 @@ namespace PongGame {
         ~MainMenuScene() = default;
 
     private:
-        std::shared_ptr<Engine::ui::Menu>  _menu;
-        std::shared_ptr<Engine::ui::Label> _title;
+        std::shared_ptr<Engine::ui::Menu>       _menu;
+        std::shared_ptr<Engine::ui::Label>      _title;
+        std::shared_ptr<Engine::ui::Rectangle>  _rect;
 
     };
 }

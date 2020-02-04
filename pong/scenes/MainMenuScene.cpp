@@ -9,7 +9,8 @@
 namespace PongGame {
     MainMenuScene::MainMenuScene()
     : _menu(std::make_shared<Engine::ui::Menu>(400, 350)),
-      _title(std::make_shared<Engine::ui::Label>()){
+      _title(std::make_shared<Engine::ui::Label>()),
+      _rect(std::make_shared<Engine::ui::Rectangle>()){
 
         _title->font_size(165);
         _title->init("Pong Game", 0xff4c4c, 400, 60);
@@ -24,6 +25,9 @@ namespace PongGame {
         _menu->add_button("Exit", hdl_stub, hdl_stub);
 
         add_entity(_menu);
+
+        _rect->init(20, 300, 20, 120, 0xff4c4c);
+        add_entity(_rect);
 
     }
 
