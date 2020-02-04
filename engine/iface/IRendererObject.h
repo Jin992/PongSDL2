@@ -7,7 +7,7 @@
 
 #include <memory>
 #include <renderer/Renderer.h>
-#include <IEngineObject.h>
+#include <iface/IEngineObject.h>
 
 namespace Engine {
     class IRendererObject: public IEngineObject {

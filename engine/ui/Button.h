@@ -1,36 +1,23 @@
 //
-// Created by jin on 2/2/20.
+// Created by jin on 2/3/20.
 //
 
 #ifndef PONGSDL2_BUTTON_H
 #define PONGSDL2_BUTTON_H
 
-
-#include <core/EngineData.h>
-#include <entity/Entity.h>
+#include "Label.h"
+#include <iface/IPressObject.h>
 
 namespace Engine {
     namespace ui {
-
-        typedef std::unique_ptr<SDL_Surface, SDLDestroyer>  engine_sufrace;
-        typedef std::shared_ptr<SDL_Texture>  engine_texture;
-
-    class Button: public entity::Entity {
+        class Button : public ui::Label, public IPressObject {
         public:
-            Button():_data(EngineData::EngineData::instance()) {}
-
-        protected:
-            Font::TTFFont &font() { return _data.font();}
-            int32_t window_width() { return _data.window().width();}
-            int32_t window_height() {return _data.window().height();}
-
-
-        private:
-            EngineData::EngineData &_data;
+            Button();
+            Button(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
+            ~Button() override;
         };
     }
 }
-
 
 
 #endif //PONGSDL2_BUTTON_H

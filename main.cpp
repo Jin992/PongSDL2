@@ -11,7 +11,7 @@ int main()
     Engine::Engine                  engine;
     Engine::Builder::EngineBuilder  engineBuilder;
 
-    engineBuilder.setWindow("Pong Game", 640, 480);
+    engineBuilder.setWindow("Pong Game", 800, 600);
     engineBuilder.setFont("../fonts/ARCADECLASSIC.ttf", 32);
 
     //PongGame::MainMenuScene mainMenu;

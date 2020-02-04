@@ -16,8 +16,21 @@ namespace Engine {
 
         void TTFFont::build(Error::EngineError &err) {
             _font = engine_font(TTF_OpenFont(_font_name.c_str(), _font_size));
+            err.err_msg();
             if (_font == nullptr)
-                err.err_msg("SDL failed to load ttf font: " + std::string(TTF_GetError()));
+                throw std::string("SDL failed to load ttf font: " + std::string(TTF_GetError()));
+        }
+
+        void TTFFont::font_size(uint16_t size) {
+            _font_size = size;
+            _font.release();
+            Error::EngineError err;
+            build(err);
+            std::cerr << _font_name<< std::endl;
+        }
+
+        uint16_t  TTFFont::font_size() const{
+            return _font_size;
         }
 
         engine_font &TTFFont::get() {

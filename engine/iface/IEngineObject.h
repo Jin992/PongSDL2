@@ -7,9 +7,15 @@
 namespace Engine {
 	class IEngineObject {
 	public:
-		int64_t	type() const { return type();}
+	    enum {
+	        Static,
+	        Movable,
+	        Pressable
+	    };
+		int64_t	type() const { return _type;}
 		void	type(int64_t v) { _type = v;}
 		virtual ~IEngineObject()=0; // use pure virtual destructor
+
 	private:
 		int64_t _type;
 	};

@@ -26,6 +26,8 @@ namespace Engine {
             TTFFont operator=(TTFFont const&) = delete;
             explicit  operator bool() const;
             void set_font(std::string const &, uint16_t);
+            void font_size(uint16_t size);
+            uint16_t font_size() const;
             void build(Error::EngineError &);
             engine_font &get();
 

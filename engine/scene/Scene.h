@@ -8,12 +8,9 @@
 #include <memory>
 #include <iface/IRendererObject.h>
 #include <renderer/Renderer.h>
-#include <iostream>
 #include <entity/Entity.h>
 #include <vector>
 
-// Forward declarations
-struct SDL_KeyboardEvent;
 
 namespace Engine {
     namespace Scene {
@@ -24,6 +21,7 @@ namespace Engine {
         class Scene : public IRendererObject {
         public:
             virtual  ~Scene() = default;
+            virtual void sceneEvent(SDL_Event &) = 0;
 
         protected:
             void add_entity(entity::engine_entity_ptr entity){
@@ -36,7 +34,6 @@ namespace Engine {
             }
 
         private:
-            engine_scene_ptr _scene;
             std::vector<entity::engine_entity_ptr> _entity_vec;
         };
     }
