@@ -8,7 +8,7 @@
 #include <scene/Scene.h>
 
 namespace PongGame {
-    class GameFieldScene {
+class GameFieldScene: public Engine::Scene::Scene {
 
     };
 
