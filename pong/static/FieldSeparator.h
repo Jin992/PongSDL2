@@ -18,9 +18,6 @@ class FieldSeparator: public Engine::entity::Entity {
         }
 
         void init(int32_t x, int32_t y, int32_t w, int32_t h,  int32_t padding) {
-            //int32_t _x = x;
-            //int32_t _y = y;
-
             uint64_t rect_qnt = 800 / (h + padding);
             for (uint64_t i = 0; i < rect_qnt; i++) {
                 auto rect = std::make_shared<Engine::ui::Rectangle>(Engine::ui::Rectangle());

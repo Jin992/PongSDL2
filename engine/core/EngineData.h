@@ -33,6 +33,8 @@ namespace Engine {
             Renderer::Renderer  &renderer();
             Font::TTFFont       &font();
             Scene::SceneManager &sceneManager();
+            bool                engine_status();
+            void                engine_status(bool);
 
             /// retun true if EngineData has been inited
             BuildState    state() const;
@@ -47,6 +49,7 @@ namespace Engine {
             Renderer::Renderer  _renderer;
             Font::TTFFont       _font;
             Scene::SceneManager _scene_manager;
+            bool                _engine_status;
         };
     }
 }

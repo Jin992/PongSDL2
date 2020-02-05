@@ -16,25 +16,29 @@ namespace Engine {
 
 
     void Engine::run() {
+        // Error handler
         Error::EngineError err;
+        // Engine data singleton reference
         EngineData::EngineData &data = EngineData::EngineData::instance();
+        // Check if engine  data has been initialized by builder
         if (data.state() == EngineData::BuildState::Uninitialized) return;
         SDL_Event   event;
-        bool        stop = false;
-        while (!stop) {
+
+        // Turn on engine
+        data.engine_status(true);
+
+        // Start main game loop
+        while (data.engine_status()) {
+            // Check for input events
             while(SDL_PollEvent(&event) != 0) {
                 switch(event.type) {
                     case SDL_QUIT:
-                        stop = true;
+                        data.engine_status(false);
                         break;
-
+                    // Process key press event
                     case  SDL_KEYDOWN:
                         data.sceneManager().current_scene(err)->sceneEvent(event);
                         break;
-
-                    case SDL_KEYUP:
-                        break;
-
 
                     default:
                         break;

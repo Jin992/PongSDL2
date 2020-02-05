@@ -29,14 +29,8 @@ namespace PongGame {
         _menu->add_button("Score", hdl_stub,hdl_stub);
         _menu->add_button("Credits", hdl_stub,hdl_stub);
         _menu->add_button("Exit", hdl_stub,hdl_stub);
-        _menu->setOnKeyPressDown_hdl([this](SDL_KeyboardEvent &ev) {
-            _menu->selected().onKeyPressDown(ev);
-        });
 
-        _menu->setOnKeyPressUp_hdl([](SDL_KeyboardEvent &ev) {
-            if (ev.timestamp){}
 
-        });
 
         add_entity(_menu);
 

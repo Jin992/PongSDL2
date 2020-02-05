@@ -18,6 +18,14 @@ namespace Engine {
         Menu(int32_t x, int32_t y): _item_pos(0), _active_index(0) {
             init_entity(x, y);
             type(IEngineObject::Pressable);
+            setOnKeyPressDown_hdl([this](SDL_KeyboardEvent &ev) {
+               selected().onKeyPressDown(ev);
+            });
+
+            setOnKeyPressUp_hdl([](SDL_KeyboardEvent &ev) {
+                if (ev.timestamp){}
+
+            });
         }
 
         void setItemPadding(uint16_t padding) {
@@ -71,7 +79,6 @@ namespace Engine {
         int32_t  _item_pos;
         uint16_t _padding;
         int32_t _active_index;
-
         };
     }
 }

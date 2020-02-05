@@ -38,4 +38,12 @@ namespace Engine{
             _state = state;
         }
 
+        bool EngineData::engine_status() {
+            return _engine_status;
+        }
+
+        void EngineData::engine_status(bool status) {
+            _engine_status = status;
+        }
+
     }}
