@@ -32,7 +32,7 @@ namespace Engine {
                 err = std::string(scene_name + " scene doesn't exist");
                 return;
             }
-            std::cerr << "Scene has been loaded" << std::endl;
+            //std::cerr << "Scene has been loaded" << std::endl;
             _cur_scene = scene->second;
         }
 

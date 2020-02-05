@@ -21,7 +21,8 @@ namespace Engine {
         class Scene : public IRendererObject {
         public:
             virtual  ~Scene() = default;
-            virtual void sceneEvent(SDL_Event &) = 0;
+
+            virtual void sceneEvent(SDL_Event &) =0;
 
         protected:
             void add_entity(entity::engine_entity_ptr entity){

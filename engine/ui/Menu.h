@@ -55,6 +55,10 @@ namespace Engine {
 
         }
 
+        Button &selected() {
+            return _buttons[_active_index].second;
+        }
+
         void render(Renderer::engine_renderer &renderer) override {
             for (auto it : _buttons)
                 it.second.render(renderer);

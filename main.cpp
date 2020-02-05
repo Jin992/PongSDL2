@@ -4,6 +4,7 @@
 #include <error/EngineError.h>
 #include <iostream>
 #include "pong/scenes/MainMenuScene.h"
+#include "pong/scenes/GameFieldScene.h"
 
 int main()
 {
@@ -25,6 +26,7 @@ int main()
     }
     //Engine::Scene::engine_scene_ptr main = ;
     engineBuilder.addScene("MainMenu", std::make_shared<PongGame::MainMenuScene>(), err1);
+    engineBuilder.addScene("GameField", std::make_shared<PongGame::GameFieldScene>(), err1);
     engineBuilder.startup_scene("MainMenu", err1);
 
     engine.run();

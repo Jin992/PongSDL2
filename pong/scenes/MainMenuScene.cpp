@@ -5,6 +5,7 @@
 #include <SDL_events.h>
 #include <core/EngineData.h>
 #include "MainMenuScene.h"
+#include <iostream>
 
 namespace PongGame {
     MainMenuScene::MainMenuScene()
@@ -17,12 +18,25 @@ namespace PongGame {
         add_entity(_title);
 
         auto hdl_stub = [](SDL_KeyboardEvent &ev) {if (ev.timestamp){}};
+        auto play_down = [](SDL_KeyboardEvent &ev) {
+            if (ev.keysym.sym == SDLK_RETURN) {
+                std::string err;
+                Engine::EngineData::EngineData::instance().sceneManager().load_scene("GameField",err);
+            }};
         _menu->font_size(48);
         _menu->setItemPadding(40);
-        _menu->add_button("Play", hdl_stub, hdl_stub);
-        _menu->add_button("Score", hdl_stub, hdl_stub);
-        _menu->add_button("Credits", hdl_stub, hdl_stub);
-        _menu->add_button("Exit", hdl_stub, hdl_stub);
+        _menu->add_button("Play", play_down,hdl_stub);
+        _menu->add_button("Score", hdl_stub,hdl_stub);
+        _menu->add_button("Credits", hdl_stub,hdl_stub);
+        _menu->add_button("Exit", hdl_stub,hdl_stub);
+        _menu->setOnKeyPressDown_hdl([this](SDL_KeyboardEvent &ev) {
+            _menu->selected().onKeyPressDown(ev);
+        });
+
+        _menu->setOnKeyPressUp_hdl([](SDL_KeyboardEvent &ev) {
+            if (ev.timestamp){}
+
+        });
 
         add_entity(_menu);
 
@@ -47,7 +61,7 @@ namespace PongGame {
                         break;
 
                     case SDLK_RETURN:
-                        std::cout << "ENTER PRESSED" << std::endl;
+                        _menu->onKeyPressDown(ev.key);
                         break;
 
                     default:

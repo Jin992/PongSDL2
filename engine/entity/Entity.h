@@ -8,7 +8,7 @@
 #include "../iface/IRendererObject.h"
 #include <renderer/Renderer.h>
 #include <memory>
-#include <iostream>
+
 
 namespace Engine {
     namespace entity {
@@ -27,6 +27,7 @@ namespace Engine {
             : _x(x), _y(y), _w(w), _h(h), _visible(true)
             {}
 
+        protected:
             void init_entity(int32_t x, int32_t y, int32_t w=0, int32_t h=0) {
                _x = x;
                _y = y;
@@ -70,8 +71,8 @@ namespace Engine {
             }
 
 
-
         private:
+
             int32_t                 _x;
             int32_t                 _y;
             int32_t                 _w;

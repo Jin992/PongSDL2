@@ -30,6 +30,7 @@ namespace Engine {
                 SDL_SetRenderDrawColor(renderer.get(), 0xFF, 0xFF, 0xFF, 0xFF);
                 SDL_RenderFillRect(renderer.get(), &_rect);
             }
+
             void update() override{}
             int32_t color() const {
                return entity_color();

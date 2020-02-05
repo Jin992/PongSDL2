@@ -4,6 +4,9 @@
 
 #ifndef PONGSDL2_IENGINEOBJECT_H
 #define PONGSDL2_IENGINEOBJECT_H
+
+#include <cstdint>
+
 namespace Engine {
 	class IEngineObject {
 	public:
@@ -13,8 +16,8 @@ namespace Engine {
 	        Pressable,
 	        Collidable
 	    };
-		int64_t	type() const { return _type;}
-		void	type(int64_t v) { _type = v;}
+		int32_t	type() const { return _type;}
+		void	type(int32_t v) { _type = v;}
 		virtual ~IEngineObject() = 0; // use pure virtual destructor
 
 	private:
