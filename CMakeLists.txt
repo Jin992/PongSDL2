@@ -34,7 +34,7 @@ add_executable(PongSDL2 main.cpp
         pong/UI/Paddle.cpp
         pong/UI/Ball.cpp
          pong/UI/wall.cpp
-        pong/UI/ScoreManager.cpp pong/UI/ScoreManager.h)
+        pong/UI/ScoreManager.cpp pong/UI/ScoreManager.h pong/scenes/CreditScene.cpp pong/scenes/CreditScene.h)
 
 #string trailing whitespaces
 target_link_libraries(PongSDL2 SDL2::Main SDL2::TTF )#SDL2::Image SDL2::Mixer)
