@@ -6,6 +6,7 @@
 #define PONGSDL2_LABEL_H
 
 #include <ui/UIEntity.h>
+#include <error/EngineError.h>
 
 namespace Engine {
     namespace ui {
@@ -13,25 +14,22 @@ namespace Engine {
         public:
             Label();
             Label(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
-            void init(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
-            void update() override;
-            void color(int32_t new_color);
-            int32_t color() const;
+            void            init(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
+            void            update() override;
+            void            color(int32_t new_color);
+            int32_t         color() const;
 
-            void render(Renderer::engine_renderer &renderer) override {
-                SDL_Rect rect{x(), y(), 0, 0};
-                SDL_QueryTexture(_texture.get(), nullptr, nullptr, &rect.w, &rect.h);
-                rect.x -= rect.w / 2;
-                SDL_RenderCopy(renderer.get(), _texture.get(), nullptr, &rect);
-            }
-
-            std::string text() const {
-                return _btn_text;
-            }
+            void            render(Renderer::engine_renderer &renderer) override;
+            std::string     text() const;
+            void            set_text(std::string const &str);
 
         private:
-            std::string     _btn_text;
+            void            _reinit();
+
+        private:
+            std::string     _text;
             engine_texture  _texture;
+            uint32_t        _color;
         };
 
     }

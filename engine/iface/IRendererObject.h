@@ -7,13 +7,12 @@
 
 #include <memory>
 #include <renderer/Renderer.h>
-#include <iface/IEngineObject.h>
 
 namespace Engine {
-    class IRendererObject: public IEngineObject {
+    class IRendererObject {
     public:
         virtual void render(Renderer::engine_renderer &) = 0;
-        virtual void update() = 0;
+        virtual void update() {}
         virtual ~IRendererObject() = default;
     };
 }

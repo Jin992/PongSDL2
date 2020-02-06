@@ -6,18 +6,13 @@
 
 namespace Engine {
     namespace ui {
-        Button::Button():Label() {
-            type(IEngineObject::Pressable);
-
+        Button::Button() : Label() {
+            type(entity::Pressable);
         }
-
-        Button::~Button(){};
 
         Button::Button(std::string const &btn_text, int32_t color, int32_t x, int32_t y)
-        : Label(btn_text, color, x, y){
-            type(IEngineObject::Pressable);
-
+                : Label(btn_text, color, x, y) {
+            type(entity::Pressable);
         }
-
     }
 }

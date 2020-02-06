@@ -16,16 +16,6 @@
 
 namespace PongGame {
 
-    class downHDL {
-        void operator()(SDL_KeyboardEvent &ev){
-            if (ev.keysym.sym == SDLK_RETURN) {
-                std::string err;
-                Engine::EngineData::EngineData::instance().sceneManager().load_scene("GameField", err);
-            }
-        }
-    };
-
-
     class MainMenuScene: public Engine::Scene::Scene {
     public:
         MainMenuScene();
@@ -33,21 +23,11 @@ namespace PongGame {
         void sceneEvent(SDL_Event &ev) override;
         void update() override ;
 
-        void hdl_stub(SDL_KeyboardEvent &ev) {
-            if (ev.timestamp){}};
-        void onDown(SDL_KeyboardEvent &ev) {
-            if (ev.keysym.sym == SDLK_RETURN) {
-                std::string err;
-                Engine::EngineData::EngineData::instance().sceneManager().load_scene("GameField",err);
-            }};
-
-
         ~MainMenuScene() = default;
 
     private:
         std::shared_ptr<Engine::ui::Menu>       _menu;
         std::shared_ptr<Engine::ui::Label>      _title;
-        std::shared_ptr<Engine::ui::Rectangle>  _rect;
 
     };
 }

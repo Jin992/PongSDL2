@@ -15,12 +15,12 @@ namespace Engine {
         public:
             SceneManager();
 
-            void            startup_scene(std::string const &scene_name, std::string &err);
-            void            add_scene(std::string const &scene_name, engine_scene_ptr scene, std::string &err);
-            void            load_scene(std::string const &, std::string &);
-            uint64_t        scenes_qnt();
-            bool            startup_scene();
-            engine_scene_ptr current_scene(Error::EngineError &);
+            void                startup_scene(std::string const &scene_name);
+            void                add_scene(std::string const &scene_name, engine_scene_ptr scene);
+            void                load_scene(std::string const &);
+            uint64_t            scenes_qnt();
+            bool                startup_scene();
+            engine_scene_ptr    current_scene();
 
         private:
             std::map<std::string, engine_scene_ptr>  _scenes;

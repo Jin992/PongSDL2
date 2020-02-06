@@ -15,9 +15,8 @@ namespace Engine {
             _font_size = size;
         }
 
-        void TTFFont::build(Error::EngineError &err) {
+        void TTFFont::build() {
             _font = engine_font(TTF_OpenFont(_font_name.c_str(), _font_size));
-            err.err_msg();
             if (_font == nullptr)
                 throw std::string("SDL failed to load ttf font: " + std::string(TTF_GetError()));
         }
@@ -26,7 +25,7 @@ namespace Engine {
             _font_size = size;
             _font.release();
             Error::EngineError err;
-            build(err);
+            build();
             std::cerr << _font_name<< std::endl;
         }
 
@@ -38,7 +37,7 @@ namespace Engine {
             return _font;
         }
 
-        engine_texture TTFFont::createText(std::string const &text, uint32_t color, Error::EngineError &err) {
+        engine_texture TTFFont::createText(std::string const &text, uint32_t color) {
             // Translate uint to rbga
             uint8_t rbga[4];
             memcpy(rbga, &color, 4);
@@ -46,16 +45,14 @@ namespace Engine {
 
             // Create surface with text
             engine_sufrace sufrace(TTF_RenderText_Blended(_font.get(), text.c_str(), _color));
-            if (sufrace == nullptr) {
-                err.err_msg("Failed to create surface with a text " + std::string(TTF_GetError()));
-                return nullptr;
-            }
+            if (sufrace == nullptr)
+                throw std::string("Failed to create surface with a text " + std::string(TTF_GetError()));
             // Create texture from the surface
             EngineData::EngineData &data = EngineData::EngineData::instance();
             engine_texture texture(SDL_CreateTextureFromSurface(data.renderer().get().get(), sufrace.get()));
             if (texture == nullptr) {
-                err.err_msg("Failed to create texture from text surface: " + std::string(SDL_GetError()));
-                return nullptr;
+                sufrace.release();
+                throw std::string("Failed to create texture from text surface: " + std::string(SDL_GetError()));
             }
             return texture;
         }

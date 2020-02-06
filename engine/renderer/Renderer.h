@@ -29,7 +29,7 @@ namespace Engine {
             explicit operator bool() const;
 
             engine_renderer &get();
-            void build(Window::Window &, Error::EngineError &);
+            void build(Window::Window &);
 
         private:
             engine_renderer _renderer;

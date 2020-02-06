@@ -16,7 +16,7 @@ namespace Engine {
             _width = width;
         }
 
-        void Window::build(Error::EngineError &err) {
+        void Window::build() {
             _window = engine_window(
                     SDL_CreateWindow(_title.c_str(),
                                      SDL_WINDOWPOS_UNDEFINED,
@@ -25,7 +25,7 @@ namespace Engine {
                                      _height,
                                      SDL_WINDOW_SHOWN));
             if (_window == nullptr)
-                err.err_msg("SDL failed to create window: " + std::string(SDL_GetError()));
+                throw std::string("SDL failed to create window: " + std::string(SDL_GetError()));
         }
 
         uint32_t Window::height() const {

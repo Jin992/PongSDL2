@@ -6,12 +6,13 @@
 #define PONGSDL2_ENGINE_H
 
 
+#include <SDL_rect.h>
 
 namespace Engine {
 
     class Engine {
     public:
-        Engine();
+        Engine() = default;
         Engine(Engine const &) = delete;
         Engine(Engine const &&) = delete;
         Engine &operator=(Engine const &) = delete;
@@ -22,10 +23,6 @@ namespace Engine {
         bool init();
         /// start game loop
         void run();
-
-    private:
-
-
     };
 }
 

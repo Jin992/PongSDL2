@@ -21,7 +21,6 @@ namespace Engine {
         class Scene : public IRendererObject {
         public:
             virtual  ~Scene() = default;
-
             virtual void sceneEvent(SDL_Event &) =0;
 
         protected:

@@ -17,19 +17,17 @@ namespace Engine {
 
     class UIEntity: public entity::Entity {
         public:
-            UIEntity() {}
-        void  font_size(uint16_t size){
-            font().font_size(size);
-        }
+            UIEntity() = default;
 
-        uint16_t  font_size() {
-            return font().font_size();
-        }
+            virtual ~UIEntity() = default;
+
+        void  font_size(uint16_t size);
+        uint16_t  font_size();
 
         protected:
-            Font::TTFFont &font() { return EngineData::EngineData::instance().font();}
-            int32_t window_width() { return EngineData::EngineData::instance().window().width();}
-            int32_t window_height() {return EngineData::EngineData::instance().window().height();}
+            Font::TTFFont &font();
+            int32_t window_width();
+            int32_t window_height();
         };
     }
 }

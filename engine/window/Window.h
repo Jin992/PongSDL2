@@ -26,12 +26,12 @@ namespace Engine {
             Window operator=(Window const &) = delete;
             explicit operator bool() const;
 
-            void                        init(std::string const &title, uint32_t height=WIN_DEFAULT_H, uint32_t width=WIN_DEFAULT_W);
-            void                        build(Error::EngineError &);
-            uint32_t      height() const;
-            uint32_t      width() const;
-            std::string   title() const;
-            engine_window               &get();
+            void            init(std::string const &title, uint32_t height=WIN_DEFAULT_H, uint32_t width=WIN_DEFAULT_W);
+            void            build();
+            uint32_t        height() const;
+            uint32_t        width() const;
+            std::string     title() const;
+            engine_window   &get();
 
         private:
             engine_window   _window;

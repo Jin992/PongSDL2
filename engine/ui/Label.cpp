@@ -3,41 +3,58 @@
 //
 
 #include "Label.h"
+
 namespace Engine {
     namespace ui {
-        Label::Label() : _btn_text("Undefined") {
-            entity_color(0xffffff);
-            type(IEngineObject::Static);
-            init(_btn_text, entity_color(), 0, 0);
+        Label::Label() : _text("Undefined"), _color(0xffffff){
+            type(entity::Static);
         }
 
-        Label::Label(std::string const &btn_text, int32_t color, int32_t x, int32_t y) {
-            type(IEngineObject::Static);
-            init(btn_text, color, x, y);
+        Label::Label(std::string const &text, int32_t color, int32_t x, int32_t y)
+        : _text(text), _color(color) {
+            type(entity::Static);
+            init(_text, color, x, y);
         }
 
 
         void Label::init(std::string const &btn_text, int32_t color, int32_t x, int32_t y) {
-            Engine::Error::EngineError err;
-            _btn_text = btn_text;
-            entity_color(color);
-            init_entity(x, y);
+            _text = btn_text;
+            _color = color;
+            set_x(x);
+            set_y(y);
 
-            _texture = font().createText(_btn_text, entity_color(), err);
+            _texture = font().createText(_text, _color);
         }
 
         void Label::color(int32_t new_color) {
-            Engine::Error::EngineError err;
-            entity_color(new_color);
-            _texture = font().createText(_btn_text, new_color, err);
+            _color = new_color;
+            _texture = font().createText(_text, new_color);
         }
 
         int32_t Label::color() const {
-            return entity_color();
+            return _color;
         }
 
-        void Label::update() {
+        void Label::render(Renderer::engine_renderer &renderer)  {
+            SDL_Rect rect{x(), y(), 0, 0};
+            SDL_QueryTexture(_texture.get(), nullptr, nullptr, &rect.w, &rect.h);
+            rect.x -= rect.w / 2;
+            SDL_RenderCopy(renderer.get(), _texture.get(), nullptr, &rect);
+        }
 
+        std::string Label::text() const {
+            return _text;
+        }
+
+        void Label::set_text(std::string const &str) {
+            _text = str;
+            _reinit();
+        }
+
+        void Label::update() {}
+
+        void Label::_reinit() {
+            _texture = font().createText(_text, _color);
         }
 
     }

@@ -15,71 +15,38 @@ namespace Engine {
         class Entity;
 
         typedef std::shared_ptr<Entity> engine_entity_ptr;
-        typedef std::shared_ptr<SDL_Texture>  engine_texture;
 
+        enum {
+            Static,
+            Pressable,
+            Collidable
+        };
 
         class Entity : public IRendererObject {
         public:
-            Entity(): _x(0), _y(0), _w(0), _h(0), _visible(true)
-            {}
+            Entity();
+            virtual ~Entity() = 0;
+            int32_t x() const;
+            int32_t y() const;
+            int32_t w() const;
+            int32_t h() const ;
 
-            Entity(int32_t x, int32_t y, int32_t w=0, int32_t h=0)
-            : _x(x), _y(y), _w(w), _h(h), _visible(true)
-            {}
+            void set_x(int32_t);
+            void set_y(int32_t);
+            void set_h(int32_t);
+            void set_w(int32_t);
+            int32_t	type() const;
+            void	type(int32_t v);
 
         protected:
-            void init_entity(int32_t x, int32_t y, int32_t w=0, int32_t h=0) {
-               _x = x;
-               _y = y;
-               _w = w;
-               _h = h;
-            }
-
-            //void render(Renderer::engine_renderer &renderer) override {
-            //}
-
-            bool visible() const {
-                return _visible;
-            }
-
-            void visible(bool status) {
-                _visible = status;
-            }
-
-            int32_t x() const {
-                return _x;
-            }
-
-            int32_t  y() const {
-                return _y;
-            }
-
-            int32_t w() const {
-                return _w;
-            }
-
-            int32_t h() const {
-                return _h;
-            }
-
-            int32_t entity_color() const {
-                return _color;
-            }
-
-            void entity_color(int32_t v) {
-                _color = v;
-            }
-
+            SDL_Rect &rect();
 
         private:
-
-            int32_t                 _x;
-            int32_t                 _y;
-            int32_t                 _w;
-            int32_t                 _h;
-            bool                    _visible;
-            int32_t                 _color;
+            SDL_Rect                _rect;
+            int64_t                 _type;
         };
+
+        inline  Entity::~Entity() {}
     }
 }
 

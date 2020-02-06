@@ -19,19 +19,19 @@ namespace Engine {
             void setRendererFPS(uint16_t fps);
             void setFont(std::string const &, uint16_t);
 
-            void addScene(std::string const &,  Scene::engine_scene_ptr scene, std::string &);
-            void loadScene(std::string const&, std::string &);
-            void startup_scene(std::string const &, std::string &);
-            bool build(Error::EngineError &err);
+            void addScene(std::string const &,  Scene::engine_scene_ptr scene);
+            void loadScene(std::string const&);
+            void startup_scene(std::string const &);
+            bool build();
 
         private:
-            bool _init_sdl(Error::EngineError &);
-            bool _sdl(Error::EngineError &);
-            bool _ttf(Error::EngineError &);
+            bool _init_sdl();
+            bool _sdl();
+            bool _ttf();
 
         private:
-            EngineData::EngineData &_data;
-            uint16_t    _render_fps;
+            EngineData::EngineData  &_data;
+            uint16_t                _render_fps;
 
         };
     }

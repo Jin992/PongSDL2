@@ -14,7 +14,7 @@ namespace Engine {
         public:
             Button();
             Button(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
-            ~Button() override;
+            ~Button() = default;
         };
     }
 }

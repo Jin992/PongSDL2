@@ -28,10 +28,10 @@ namespace Engine {
             void set_font(std::string const &, uint16_t);
             void font_size(uint16_t size);
             uint16_t font_size() const;
-            void build(Error::EngineError &);
+            void build();
             engine_font &get();
 
-            engine_texture createText(std::string const &, uint32_t, Error::EngineError &);
+            engine_texture createText(std::string const &, uint32_t);
 
         private:
             engine_font _font;

@@ -10,8 +10,7 @@
 namespace PongGame {
     MainMenuScene::MainMenuScene()
     : _menu(std::make_shared<Engine::ui::Menu>(400, 350)),
-      _title(std::make_shared<Engine::ui::Label>()),
-      _rect(std::make_shared<Engine::ui::Rectangle>()){
+      _title(std::make_shared<Engine::ui::Label>()) {
 
         _title->font_size(165);
         _title->init("Pong Game", 0xff4c4c, 400, 60);
@@ -21,29 +20,34 @@ namespace PongGame {
         auto play_down = [](SDL_KeyboardEvent &ev) {
             if (ev.keysym.sym == SDLK_RETURN) {
                 std::string err;
-                Engine::EngineData::EngineData::instance().sceneManager().load_scene("GameField",err);
+                Engine::EngineData::EngineData::instance().sceneManager().load_scene("GameField");
             }};
+        auto credits_down = [](SDL_KeyboardEvent &ev) {
+            if (ev.keysym.sym == SDLK_RETURN) {
+                std::string err;
+                Engine::EngineData::EngineData::instance().sceneManager().load_scene("Credits");
+            }};
+
+        auto exit_down = [](SDL_KeyboardEvent &ev) {
+            if (ev.keysym.sym == SDLK_RETURN) {
+                std::string err;
+                Engine::EngineData::EngineData::instance().engine_status(false);
+            }};
+        
         _menu->font_size(48);
         _menu->setItemPadding(40);
         _menu->add_button("Play", play_down,hdl_stub);
-        _menu->add_button("Score", hdl_stub,hdl_stub);
-        _menu->add_button("Credits", hdl_stub,hdl_stub);
-        _menu->add_button("Exit", hdl_stub,hdl_stub);
-
-
+        _menu->add_button("Credits", credits_down,hdl_stub);
+        _menu->add_button("Exit", exit_down,hdl_stub);
 
         add_entity(_menu);
-
-        _rect->init(20, 300, 20, 120, 0xff4c4c);
-        add_entity(_rect);
-
     }
 
     void MainMenuScene::sceneEvent(SDL_Event &ev) {
 
         for_each_entity([&ev, this](Engine::entity::engine_entity_ptr entity){
 
-            if (entity->type() != Engine::IEngineObject::Pressable) return;
+            if (entity->type() != Engine::entity::Pressable) return;
             if(ev.type == SDL_KEYDOWN) {
                 switch (ev.key.keysym.sym ){
                     case SDLK_DOWN:
@@ -74,5 +78,4 @@ namespace PongGame {
     void MainMenuScene::update() {
 
     }
-
 }
