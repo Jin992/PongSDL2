@@ -19,6 +19,10 @@ namespace PongGame {
                         _player_paddle->moveUp();
                         break;
 
+                    case SDLK_ESCAPE:
+                        Engine::EngineData::EngineData::instance().sceneManager().load_scene("MainMenu");
+                        break;
+
                     default:
                         break;
                 }
