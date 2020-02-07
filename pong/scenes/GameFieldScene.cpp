@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <zconf.h>
 #include "GameFieldScene.h"
 
 namespace PongGame {
@@ -34,11 +35,15 @@ namespace PongGame {
         for_each_entity([&renderer](Engine::entity::engine_entity_ptr entity) {
             entity->render(renderer);
         });
+        if (_terminate_game) {
+            _score_manager->all_scores_to_zero();
+            _terminate_game = false;
+            Engine::EngineData::EngineData::instance().sceneManager().load_scene("MainMenu");
+        }
     }
 
     void GameFieldScene::update() {
         static std::shared_ptr<Engine::entity::Entity> prev_obstacle;
-        //static bool terminate_game = false;
         // launch ai
         _ai(_ball, _ai_paddle);
         // calculate ball collisions
@@ -61,17 +66,17 @@ namespace PongGame {
         if (winner != 0) {
             if (winner == -1) {
                 _winner = std::make_shared<Engine::ui::Label>();
-                _winner->init("AI           WINS", 0xffffffff, win_witdh/2 + 10, win_height/2 - 20);
+                _winner->init("AI           WINS", 0xffffffff, _win_witdh/2 + 10, _win_height/2 - 20);
                 _winner->type(Engine::entity::Static);
                 add_entity(_winner);
-                //terminate_game = true;
+                _terminate_game = true;
             }
             if (winner == 1) {
                 _winner = std::make_shared<Engine::ui::Label>();
-                _winner->init("PLAYER        WINS", 0xffffffff, win_witdh/2 + 10, win_height/2 - 20);
+                _winner->init("PLAYER        WINS", 0xffffffff, _win_witdh/2 + 10, _win_height/2 - 20);
                 _winner->type(Engine::entity::Static);
                 add_entity(_winner);
-                //terminate_game = true;
+                _terminate_game = true;
             }
         }
 
@@ -80,44 +85,40 @@ namespace PongGame {
     }
 
     GameFieldScene::GameFieldScene()
-    : _separator(std::make_shared<FieldSeparator>()),
-    _score_manager(std::make_shared<ScoreManager>())
+    /// Architecture error can't inherit from Scene window height width, need to fix
+    : _win_witdh(Engine::EngineData::EngineData::instance().window().width()),
+      _win_height(Engine::EngineData::EngineData::instance().window().height()),
+      _separator(std::make_shared<FieldSeparator>()),
+      _walls(std::make_shared<PongGame::Wall>(0, 0,  _win_witdh, 10, 0Xfffffff)),
+      _walls2(std::make_shared<PongGame::Wall>(0, _win_height-10, _win_witdh , 10, 0Xfffffff)),
+      _player_paddle(std::make_shared<PongGame::Paddle>(20, _win_height / 2 - 60, 20, 120,0Xfffffff)),
+      _ai_paddle(std::make_shared<PongGame::Paddle>(_win_witdh - 40, _win_height /2 - 60, 20, 120,0Xfffffff)),
+      _ball(std::make_shared<PongGame::Ball>(_win_witdh /2, _win_height/2 - 12, 25, 25, 0xffffffff)),
+      _score_manager(std::make_shared<ScoreManager>()),
+     _terminate_game(0)
     {
-        win_witdh = Engine::EngineData::EngineData::instance().window().width();
-        win_height = Engine::EngineData::EngineData::instance().window().height();
-        /// Architecture error can't inherit from Scene, need to fix
-        int32_t half_screen = Engine::EngineData::EngineData::instance().window().width() / 2;
         _separator->setColor(0xffffffff);
-        _separator->init(half_screen, 0, 6, 24, 20);
+        _separator->init(Engine::EngineData::EngineData::instance().window().width() / 2, 0, 6, 24, 20);
+        /// Add entities to scene
         add_entity(_separator);
-
-
-        _walls = std::make_shared<PongGame::Wall>(0, 0,  win_witdh, 10, 0Xfffffff);
         add_entity(_walls);
-
-        _walls2 = std::make_shared<PongGame::Wall>(0, win_height-10, win_witdh , 10, 0Xfffffff);
         add_entity(_walls2);
-
-        _player_paddle = std::make_shared<PongGame::Paddle>(20, win_height / 2 - 60, 20, 120,0Xfffffff);
-        _ai_paddle = std::make_shared<PongGame::Paddle>(win_witdh - 40, win_height /2 - 60, 20, 120,0Xfffffff);
         add_entity(_player_paddle);
         add_entity(_ai_paddle);
-
-        _ball = std::make_shared<PongGame::Ball>(win_witdh /2, win_height/2 - 12, 25, 25, 0xffffffff);
-
         add_entity(_ball);
         add_entity(_score_manager);
-
+        /// Set which of scene entities would be collidable
         _obstacles.push_back(_player_paddle);
         _obstacles.push_back(_ai_paddle);
         _obstacles.push_back(_walls);
         _obstacles.push_back(_walls2);
     }
 
+    /// Very simple ai logic
     void  GameFieldScene::_ai(std::shared_ptr<Ball> ball, std::shared_ptr<Paddle> paddle) {
         std::mt19937 gen(time(0));
         std::uniform_int_distribution<int> distribution(1,200);
-        constexpr  int32_t  paddle_speed = 7;
+        constexpr  int32_t  paddle_speed = 1;
 
         if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 2 == 0 && paddle->x() - ball->x() < 120) {  // If the ball is below the center of the paddle
             paddle->set_y(paddle->y() + paddle_speed);                      // Move downwards
@@ -134,7 +135,7 @@ namespace PongGame {
             paddle->set_y(paddle->y() - paddle_speed);                      // Move downwards
         }
     }
-
+    /// Collision manager. calculate collisions
     std::shared_ptr<Engine::entity::Entity>  GameFieldScene::_calculateCollision(std::shared_ptr<Engine::entity::Entity> tracked_obj) {
         int32_t x = 0;
         int32_t y = 0;

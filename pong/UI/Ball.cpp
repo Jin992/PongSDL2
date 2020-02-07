@@ -2,16 +2,17 @@
 // Created by jin on 2/4/20.
 //
 
+#include <iostream>
 #include "Ball.h"
 
 namespace PongGame {
-    Ball::Ball():_xspeed(8), _yspeed(8){
+    Ball::Ball():_xspeed(15), _yspeed(15){
         type(Engine::entity::Collidable);
         init(0, 0,0,0, 0xffffff);
     }
 
     Ball::Ball(int32_t x, int32_t y, uint32_t w, int32_t h, uint32_t color)
-    : _xspeed(8), _yspeed(8), _spawn_x(x), _spawn_y(y)
+    : _xspeed(15), _yspeed(15), _spawn_x(x), _spawn_y(y)
     {
         type(Engine::entity::Collidable);
         init(x, y, w, h, color);
@@ -34,9 +35,8 @@ void Ball::set_xspeed(double speed) {
 }
 
 void Ball::accelerate() {
-
-    _ball_x += _xspeed;
-    _ball_y += _yspeed;
+    _ball_x += _xspeed * (1.0 / 60.0);
+    _ball_y += _yspeed * (1.0 / 60.0);
     set_x(_ball_x);
     set_y(_ball_y);
 }
@@ -50,7 +50,10 @@ void Ball::changeYdirection() {
 }
 
 
-void Ball::setXspeed(double val){ _xspeed = val;}
+void Ball::setXspeed(double val){
+        _xspeed = val;
+    }
+
 void Ball::setYspeed(double val){ _yspeed = val;}
 
 double Ball::xSpeed() const {

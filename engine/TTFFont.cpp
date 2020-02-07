@@ -26,7 +26,6 @@ namespace Engine {
             _font.release();
             Error::EngineError err;
             build();
-            std::cerr << _font_name<< std::endl;
         }
 
         uint16_t  TTFFont::font_size() const{

@@ -15,6 +15,7 @@ public:
     ScoreManager();
     void increase_player_score();
     void increase_ai_score();
+    void all_scores_to_zero();
     void render(Engine::Renderer::engine_renderer &renderer) override;
     void update() override;
     int32_t winner();

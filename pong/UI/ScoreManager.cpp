@@ -43,4 +43,9 @@ namespace PongGame {
         return 0;
     }
 
+    void ScoreManager::all_scores_to_zero() {
+        _score_player = 0;
+        _score_ai = 0;
+    }
+
 }

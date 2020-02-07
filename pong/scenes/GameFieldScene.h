@@ -30,6 +30,8 @@ private:
     std::shared_ptr<Engine::entity::Entity> _calculateCollision(std::shared_ptr<Engine::entity::Entity> tracked_obj);
 
 private:
+    int32_t                                                 _win_witdh;
+    int32_t                                                 _win_height;
     std::shared_ptr<FieldSeparator>                         _separator;
     std::shared_ptr<PongGame::Wall>                         _walls;
     std::shared_ptr<PongGame::Wall>                         _walls2;
@@ -39,8 +41,7 @@ private:
     std::vector<std::shared_ptr<Engine::entity::Entity>>    _obstacles;
     std::shared_ptr<PongGame::ScoreManager>                 _score_manager;
     std::shared_ptr<Engine::ui::Label>                      _winner;
-    int32_t                                                 win_witdh;
-    int32_t                                                 win_height;
+    bool                                                    _terminate_game;
     const int _half = 2;
     };
 
