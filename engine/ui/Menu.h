@@ -22,12 +22,12 @@ namespace Engine {
         void    add_button(std::string const & name, engine_key_hdl down, engine_key_hdl up);
         void    nextIndex();
         void    prevIndex();
-        Button  &selected();
+        std::shared_ptr<Button>selected();
         void    render(Renderer::engine_renderer &renderer) override;
         void    update() override;
 
     private:
-        std::vector<std::pair<std::string, Button>> _buttons;
+        std::vector<std::pair<std::string, std::shared_ptr<Button>>> _buttons;
         int32_t                                     _item_pos;
         uint16_t                                    _padding;
         int32_t                                     _active_index;

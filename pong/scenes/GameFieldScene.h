@@ -38,6 +38,9 @@ private:
     std::shared_ptr<PongGame::Ball>                         _ball;
     std::vector<std::shared_ptr<Engine::entity::Entity>>    _obstacles;
     std::shared_ptr<PongGame::ScoreManager>                 _score_manager;
+    std::shared_ptr<Engine::ui::Label>                      _winner;
+    int32_t                                                 win_witdh;
+    int32_t                                                 win_height;
     const int _half = 2;
     };
 

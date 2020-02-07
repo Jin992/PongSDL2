@@ -6,16 +6,9 @@
 
 namespace Engine{
     namespace ui {
-        void  UIEntity::font_size(uint16_t size){
-            font().font_size(size);
-        }
-
-        uint16_t  UIEntity::font_size() {
-            return font().font_size();
-        }
-
-        Font::TTFFont &UIEntity::font() {
-            return EngineData::EngineData::instance().font();
+        UIEntity::UIEntity(){
+            set_font("../fonts/ARCADECLASSIC.ttf", 32);
+            build();
         }
 
         int32_t UIEntity::window_width() {

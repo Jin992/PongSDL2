@@ -17,6 +17,7 @@ public:
     void increase_ai_score();
     void render(Engine::Renderer::engine_renderer &renderer) override;
     void update() override;
+    int32_t winner();
 
 private:
     std::shared_ptr<Engine::ui::Label>                      _score_player_label;

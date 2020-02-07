@@ -8,6 +8,7 @@
 
 #include <core/EngineData.h>
 #include <entity/Entity.h>
+#include <TTFFont.h>
 
 namespace Engine {
     namespace ui {
@@ -15,17 +16,14 @@ namespace Engine {
         typedef std::unique_ptr<SDL_Surface, SDLDestroyer>  engine_sufrace;
         typedef std::shared_ptr<SDL_Texture>  engine_texture;
 
-    class UIEntity: public entity::Entity {
+    class UIEntity: public entity::Entity, public Font::TTFFont {
         public:
-            UIEntity() = default;
+            UIEntity();
 
             virtual ~UIEntity() = default;
 
-        void  font_size(uint16_t size);
-        uint16_t  font_size();
-
         protected:
-            Font::TTFFont &font();
+
             int32_t window_width();
             int32_t window_height();
         };

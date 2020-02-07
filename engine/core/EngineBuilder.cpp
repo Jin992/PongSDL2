@@ -16,10 +16,6 @@ namespace Engine {
             _render_fps = fps;
         }
 
-        void EngineBuilder::setFont(const std::string &font_name, uint16_t font_size) {
-            _data.font().set_font(font_name, font_size);
-        }
-
         void EngineBuilder::addScene(std::string const & sceneName,  Scene::engine_scene_ptr scene) {
             _data.sceneManager().add_scene(sceneName, scene);
         }
@@ -33,27 +29,21 @@ namespace Engine {
             _data.sceneManager().startup_scene(sceneName);
         }
 
-        bool EngineBuilder::_sdl() {
-            if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
-                //err.err_msg("Failed to init SDL main module: " + std::string(SDL_GetError()));
-                return false;
-            }
-            return true;
+        void EngineBuilder::_sdl() {
+            if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
+                throw std::string("Failed to init SDL main module: " + std::string(SDL_GetError()));
         }
 
-        bool EngineBuilder::_ttf() {
-            if (TTF_Init() < 0) {
+        void EngineBuilder::_ttf() {
+            if (TTF_Init() < 0)
                 /// TODO check if SDL_GetError() correct for ttf errors
-                //err.err_msg("Failed to initialize SDL_ttf module: " + std::string(SDL_GetError()));
-                return false;
-            }
-            return true;
+                throw std::string("Failed to initialize SDL_ttf module: " + std::string(SDL_GetError()));
+
         }
 
-        bool EngineBuilder::_init_sdl() {
-            if (!_sdl()) return false;
-            if (!_ttf()) return false;
-            return true;
+        void EngineBuilder::_init_sdl() {
+            _sdl();
+            _ttf();
         }
 
 
@@ -65,8 +55,6 @@ namespace Engine {
             _data.window().build();
             // Initialize SDL_Renderer
             _data.renderer().build(_data.window());
-            // Initialize SDL_ttf
-            _data.font().build();
             // Check scenes
             /*if (!_data.sceneManager().scenes_qnt()) {
                 err.err_msg("There is no loaded scenes");

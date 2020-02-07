@@ -17,7 +17,6 @@ namespace Engine {
 
             void setWindow(std::string const &title, uint32_t width, uint32_t height);
             void setRendererFPS(uint16_t fps);
-            void setFont(std::string const &, uint16_t);
 
             void addScene(std::string const &,  Scene::engine_scene_ptr scene);
             void loadScene(std::string const&);
@@ -25,9 +24,9 @@ namespace Engine {
             bool build();
 
         private:
-            bool _init_sdl();
-            bool _sdl();
-            bool _ttf();
+            void _init_sdl();
+            void _sdl();
+            void _ttf();
 
         private:
             EngineData::EngineData  &_data;

@@ -33,5 +33,14 @@ namespace PongGame {
         _score_player_label->render(renderer);
         _score_ai_label->render(renderer);
     }
-void ScoreManager::update() {}
+
+    void ScoreManager::update() {}
+
+
+    int32_t ScoreManager::winner() {
+        if (_score_player >= 10) return 1;
+        if (_score_ai >= 10) return -1;
+        return 0;
+    }
+
 }

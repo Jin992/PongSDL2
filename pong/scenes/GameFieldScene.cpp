@@ -38,6 +38,7 @@ namespace PongGame {
 
     void GameFieldScene::update() {
         static std::shared_ptr<Engine::entity::Entity> prev_obstacle;
+        //static bool terminate_game = false;
         // launch ai
         _ai(_ball, _ai_paddle);
         // calculate ball collisions
@@ -56,6 +57,23 @@ namespace PongGame {
             _score_manager->increase_player_score();
             _ball->respawn();
         }
+        int32_t winner = _score_manager->winner();
+        if (winner != 0) {
+            if (winner == -1) {
+                _winner = std::make_shared<Engine::ui::Label>();
+                _winner->init("AI           WINS", 0xffffffff, win_witdh/2 + 10, win_height/2 - 20);
+                _winner->type(Engine::entity::Static);
+                add_entity(_winner);
+                //terminate_game = true;
+            }
+            if (winner == 1) {
+                _winner = std::make_shared<Engine::ui::Label>();
+                _winner->init("PLAYER        WINS", 0xffffffff, win_witdh/2 + 10, win_height/2 - 20);
+                _winner->type(Engine::entity::Static);
+                add_entity(_winner);
+                //terminate_game = true;
+            }
+        }
 
         prev_obstacle = obstacle;
         _ball->accelerate();
@@ -65,25 +83,27 @@ namespace PongGame {
     : _separator(std::make_shared<FieldSeparator>()),
     _score_manager(std::make_shared<ScoreManager>())
     {
+        win_witdh = Engine::EngineData::EngineData::instance().window().width();
+        win_height = Engine::EngineData::EngineData::instance().window().height();
         /// Architecture error can't inherit from Scene, need to fix
         int32_t half_screen = Engine::EngineData::EngineData::instance().window().width() / 2;
         _separator->setColor(0xffffffff);
         _separator->init(half_screen, 0, 6, 24, 20);
         add_entity(_separator);
 
-        _walls = std::make_shared<PongGame::Wall>(0, 0, Engine::EngineData::EngineData::instance().window().width() , 10, 0Xfffffff);
+
+        _walls = std::make_shared<PongGame::Wall>(0, 0,  win_witdh, 10, 0Xfffffff);
         add_entity(_walls);
 
-        _walls2 = std::make_shared<PongGame::Wall>(0, Engine::EngineData::EngineData::instance().window().height()-10, Engine::EngineData::EngineData::instance().window().width() , 10, 0Xfffffff);
+        _walls2 = std::make_shared<PongGame::Wall>(0, win_height-10, win_witdh , 10, 0Xfffffff);
         add_entity(_walls2);
 
-        _player_paddle = std::make_shared<PongGame::Paddle>(20, Engine::EngineData::EngineData::instance().window().height()/2 - 60, 20, 120,0Xfffffff);
-        _ai_paddle = std::make_shared<PongGame::Paddle>(Engine::EngineData::EngineData::instance().window().width() - 40, Engine::EngineData::EngineData::instance().window().height()/2 - 60, 20, 120,0Xfffffff);
+        _player_paddle = std::make_shared<PongGame::Paddle>(20, win_height / 2 - 60, 20, 120,0Xfffffff);
+        _ai_paddle = std::make_shared<PongGame::Paddle>(win_witdh - 40, win_height /2 - 60, 20, 120,0Xfffffff);
         add_entity(_player_paddle);
         add_entity(_ai_paddle);
 
-        _ball = std::make_shared<PongGame::Ball>(Engine::EngineData::EngineData::instance().window().width() /2,
-                                                 Engine::EngineData::EngineData::instance().window().height() /2 - 12, 25, 25, 0xffffffff);
+        _ball = std::make_shared<PongGame::Ball>(win_witdh /2, win_height/2 - 12, 25, 25, 0xffffffff);
 
         add_entity(_ball);
         add_entity(_score_manager);
@@ -97,20 +117,21 @@ namespace PongGame {
     void  GameFieldScene::_ai(std::shared_ptr<Ball> ball, std::shared_ptr<Paddle> paddle) {
         std::mt19937 gen(time(0));
         std::uniform_int_distribution<int> distribution(1,200);
+        constexpr  int32_t  paddle_speed = 7;
 
         if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 2 == 0 && paddle->x() - ball->x() < 120) {  // If the ball is below the center of the paddle
-            paddle->set_y(paddle->y() + 1);                      // Move downwards
+            paddle->set_y(paddle->y() + paddle_speed);                      // Move downwards
         } else if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 3 == 0 && paddle->x() - ball->x() < 200) {  // If the ball is below the center of the paddle
-            paddle->set_y(paddle->y() + 1);                      // Move downwards
+            paddle->set_y(paddle->y() + paddle_speed);                      // Move downwards
         } else if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 7 == 0 && paddle->x() - ball->x() < 300) {  // If the ball is below the center of the paddle
-            paddle->set_y(paddle->y() + 1);                      // Move downwards
+            paddle->set_y(paddle->y() + paddle_speed);                      // Move downwards
         }
         else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 2== 0 && paddle->x() - ball->x() < 120) {  // If the ball is above the center of the paddle
-            paddle->set_y(paddle->y() - 1);                          // Move upwards
+            paddle->set_y(paddle->y() - paddle_speed);                          // Move upwards
         } else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 3 == 0 && paddle->x() - ball->x() < 200) {  // If the ball is above the center of the paddle
-            paddle->set_y(paddle->y() - 1);                          // Move upwards
+            paddle->set_y(paddle->y() - paddle_speed);                          // Move upwards
         } else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 7 == 0 && paddle->x() - ball->x() < 300) {  // If the ball is below the center of the paddle
-            paddle->set_y(paddle->y() - 1);                      // Move downwards
+            paddle->set_y(paddle->y() - paddle_speed);                      // Move downwards
         }
     }
 

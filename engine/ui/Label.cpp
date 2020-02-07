@@ -23,12 +23,12 @@ namespace Engine {
             set_x(x);
             set_y(y);
 
-            _texture = font().createText(_text, _color);
+            _texture = createText(_text, _color);
         }
 
         void Label::color(int32_t new_color) {
             _color = new_color;
-            _texture = font().createText(_text, new_color);
+            _texture = createText(_text, new_color);
         }
 
         int32_t Label::color() const {
@@ -54,7 +54,7 @@ namespace Engine {
         void Label::update() {}
 
         void Label::_reinit() {
-            _texture = font().createText(_text, _color);
+            _texture = createText(_text, _color);
         }
 
     }
