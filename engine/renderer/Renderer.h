@@ -6,9 +6,6 @@
 #define PONGSDL2_RENDERER_H
 
 #include <core/SDLDestroyer.h>
-#include <error/EngineError.h>
-
-
 #include <memory>
 
 struct SDL_Renderer;

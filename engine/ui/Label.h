@@ -6,7 +6,6 @@
 #define PONGSDL2_LABEL_H
 
 #include <ui/UIEntity.h>
-#include <error/EngineError.h>
 
 namespace Engine {
     namespace ui {

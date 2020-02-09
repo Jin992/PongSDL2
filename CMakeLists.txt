@@ -20,22 +20,22 @@ add_executable(PongSDL2 main.cpp
                         engine/core/EngineData.cpp
                         engine/core/EngineBuilder.cpp
                         engine/scene/SceneManager.cpp
-        pong/scenes/MainMenuScene.cpp
-        engine/window/Window.cpp
-        engine/renderer/Renderer.cpp
-        engine/error/EngineError.cpp
-        engine/TTFFont.cpp
-        engine/ui/UIEntity.cpp
-        engine/ui/Label.cpp
-        engine/ui/Button.cpp
-        engine/ui/Menu.cpp
-        engine/ui/Rectangle.cpp
-        pong/scenes/GameFieldScene.cpp
-        pong/static/FieldSeparator.cpp
-        pong/UI/Paddle.cpp
-        pong/UI/Ball.cpp
-         pong/UI/wall.cpp
-        pong/UI/ScoreManager.cpp pong/UI/ScoreManager.h pong/scenes/CreditScene.cpp pong/scenes/CreditScene.h pong/config/config.h)
+                        pong/scenes/MainMenuScene.cpp
+                        engine/window/Window.cpp
+                        engine/renderer/Renderer.cpp
+                        engine/TTFFont.cpp
+                        engine/ui/UIEntity.cpp
+                        engine/ui/Label.cpp
+                        engine/ui/Button.cpp
+                        engine/ui/Menu.cpp
+                        engine/ui/Rectangle.cpp
+                        pong/scenes/GameFieldScene.cpp
+                        pong/static/FieldSeparator.cpp
+                        pong/UI/Paddle.cpp
+                        pong/UI/Ball.cpp
+                        pong/UI/wall.cpp
+                        pong/UI/ScoreManager.cpp
+                        pong/scenes/CreditScene.cpp)
 
 #string trailing whitespaces
 target_link_libraries(PongSDL2 SDL2::Main SDL2::TTF )#SDL2::Image SDL2::Mixer)

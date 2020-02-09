@@ -23,7 +23,6 @@ namespace Engine {
         void TTFFont::font_size(uint16_t size) {
             _font_size = size;
             _font.release();
-            Error::EngineError err;
             build();
         }
 

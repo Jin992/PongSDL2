@@ -19,8 +19,6 @@ namespace Engine {
         Engine &operator=(Engine const &&) = delete;
         ~Engine() = default;
 
-        /// Engine initialize function
-        bool init();
         /// start game loop
         void run();
     };

@@ -8,6 +8,7 @@
 #include "../config/config.h"
 
 namespace PongGame {
+    // process scene input events
     void GameFieldScene::sceneEvent(SDL_Event &ev, double) {
         for_each_entity([&ev, this](Engine::entity::engine_entity_ptr entity) {
             if (entity->type() != Engine::entity::Pressable) {}
@@ -21,7 +22,7 @@ namespace PongGame {
                         _player_paddle->moveUp();
                         break;
 
-                    case SDLK_ESCAPE:
+                    case SDLK_ESCAPE: // return to main menu
                         Engine::EngineData::EngineData::instance().sceneManager().load_scene("MainMenu");
                         break;
 
@@ -33,14 +34,10 @@ namespace PongGame {
     }
 
     void GameFieldScene::render(Engine::Renderer::engine_renderer &renderer) {
+        // render scene entities
         for_each_entity([&renderer](Engine::entity::engine_entity_ptr entity) {
             entity->render(renderer);
         });
-        if (_terminate_game) {
-            _score_manager->all_scores_to_zero();
-            _terminate_game = false;
-            Engine::EngineData::EngineData::instance().sceneManager().load_scene("MainMenu");
-        }
     }
 
     void GameFieldScene::update(double elapsed) {
@@ -51,38 +48,51 @@ namespace PongGame {
         auto obstacle = _calculateCollision(_ball);
         if (obstacle != nullptr) {
             if (obstacle != prev_obstacle) {
-                if (obstacle->type() == Engine::entity::Collidable) _ball->changeXdirection();
+                // when ball collide with paddle change x direction
+                if (obstacle->type() == Engine::entity::Collidable ) _ball->changeXdirection();
+                // when ball collide with walls change y direction
                 if (obstacle->type() == Engine::entity::Static) _ball->changeYdirection();
             }
         }
+        // when ball x coord lesser than zero give one point to ai and re-spawn ball to center
         if (_ball->x() < 0 ) {
             _score_manager->increase_ai_score();
             _ball->respawn();
         }
+        // when ball x coord valuer exceed scene width give one point to player and re-spawn ball to center
         if (_ball->x() > (int32_t)Engine::EngineData::EngineData::instance().window().width()) {
             _score_manager->increase_player_score();
             _ball->respawn();
         }
+        // check if there winner 0 - there is no one, 1 - player win, -1 - ai win
         int32_t winner = _score_manager->winner();
         if (winner != 0) {
             if (winner == -1) {
                 _winner = std::make_shared<Engine::ui::Label>();
-                _winner->init("AI           WINS", 0xffffffff, _win_witdh/2 + 10, _win_height/2 - 20);
+                _winner->init("AI           WINS", c_field_sep_color, _win_witdh/2 + 10, _win_height/2 - 20);
                 _winner->type(Engine::entity::Static);
                 add_entity(_winner);
                 _terminate_game = true;
             }
             if (winner == 1) {
                 _winner = std::make_shared<Engine::ui::Label>();
-                _winner->init("PLAYER        WINS", 0xffffffff, _win_witdh/2 + 10, _win_height/2 - 20);
+                _winner->init("PLAYER        WINS", c_field_sep_color, _win_witdh/2 + 10, _win_height/2 - 20);
                 _winner->type(Engine::entity::Static);
                 add_entity(_winner);
                 _terminate_game = true;
             }
         }
-
+        // save previous obstacle to discard multiple collision
         prev_obstacle = obstacle;
+        // move ball
         _ball->accelerate(elapsed);
+        // when game over return to mani menu
+        if (_terminate_game) {
+            // reset scores
+            _score_manager->all_scores_to_zero();
+            _terminate_game = false;
+            Engine::EngineData::EngineData::instance().sceneManager().load_scene("MainMenu");
+        }
     }
 
     GameFieldScene::GameFieldScene()

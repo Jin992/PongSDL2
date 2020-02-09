@@ -7,7 +7,6 @@
 
 #include <map>
 #include "Scene.h"
-#include <error/EngineError.h>
 
 namespace Engine {
     namespace Scene {

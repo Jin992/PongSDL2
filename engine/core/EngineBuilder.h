@@ -7,7 +7,6 @@
 
 #include <string>
 #include <core/EngineData.h>
-#include <error/EngineError.h>
 
 namespace Engine {
     namespace Builder {

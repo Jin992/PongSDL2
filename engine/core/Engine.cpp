@@ -5,16 +5,13 @@
 #include "Engine.h"
 #include "EngineData.h"
 #include <SDL2/SDL.h>
-#include <error/EngineError.h>
 #include <chrono>
 
 namespace Engine {
 
 #define FPS 1.0/60.0
-
+    // game loop
     void Engine::run() {
-        // Error handler
-        Error::EngineError err;
         // Engine data singleton reference
         EngineData::EngineData &data = EngineData::EngineData::instance();
         // Check if engine  data has been initialized by builder

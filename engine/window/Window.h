@@ -7,7 +7,6 @@
 
 #include <string>
 #include <core/SDLDestroyer.h>
-#include <error/EngineError.h>
 #include <memory>
 
 struct SDL_Window;

@@ -36,9 +36,7 @@ namespace Engine {
 
         void EngineBuilder::_ttf() {
             if (TTF_Init() < 0)
-                /// TODO check if SDL_GetError() correct for ttf errors
                 throw std::string("Failed to initialize SDL_ttf module: " + std::string(SDL_GetError()));
-
         }
 
         void EngineBuilder::_init_sdl() {
@@ -46,25 +44,12 @@ namespace Engine {
             _ttf();
         }
 
-
-
-
         bool EngineBuilder::build() {
             _init_sdl();
             // Initialize SDL_Window
             _data.window().build();
             // Initialize SDL_Renderer
             _data.renderer().build(_data.window());
-            // Check scenes
-            /*if (!_data.sceneManager().scenes_qnt()) {
-                err.err_msg("There is no loaded scenes");
-                return false;
-            }
-            // Check if startup scene
-            if (!_data.sceneManager().startup_scene()) {
-                err.err_msg("Startup scene is not set.");
-                return false;
-            }*/
             // Set EngineData as initialized
             _data.state(EngineData::BuildState::Initialized);
             return true;

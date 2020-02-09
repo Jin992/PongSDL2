@@ -7,7 +7,6 @@
 
 #include <memory>
 #include <core/SDLDestroyer.h>
-#include <error/EngineError.h>
 
 struct _TTF_Font;
 
