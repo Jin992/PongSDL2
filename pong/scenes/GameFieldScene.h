@@ -33,8 +33,8 @@ private:
     int32_t                                                 _win_witdh;
     int32_t                                                 _win_height;
     std::shared_ptr<FieldSeparator>                         _separator;
-    std::shared_ptr<PongGame::Wall>                         _walls;
-    std::shared_ptr<PongGame::Wall>                         _walls2;
+    std::shared_ptr<PongGame::Wall>                         _wall1;
+    std::shared_ptr<PongGame::Wall>                         _wall2;
     std::shared_ptr<PongGame::Paddle>                       _player_paddle;
     std::shared_ptr<PongGame::Paddle>                       _ai_paddle;
     std::shared_ptr<PongGame::Ball>                         _ball;

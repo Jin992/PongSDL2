@@ -3,18 +3,21 @@
 //
 
 #include "CreditScene.h"
+#include <config/config.h>
 
 namespace PongGame {
 
     CreditScene::CreditScene()
     : _title(std::make_shared<Engine::ui::Label>()), _info(std::make_shared<Engine::ui::Label>())
     {
-        _title->font_size(45);
-        _title->init(std::string("Created     by     Yevhen     Arteshchuk"), 0xff4c4c, 400, 100);
+        _title->font_size(c_credits_title_font_size);
+        _title->init(std::string("Created     by     Yevhen     Arteshchuk"),
+                c_credits_title_color, c_credits_title_x, c_credits_title_y);
         add_entity(_title);
 
-        _info->font_size(25);
-        _info->init(std::string("Press    ESC    to    return     main     menu"), 0xff4c4c, 400, 390);
+        _info->font_size(c_credits_exit_label_font_size);
+        _info->init(std::string("Press    ESC    to    return     main     menu"),
+                c_credits_exit_label_color, c_credits_exit_label_x, c_credits_exit_label_y);
         add_entity(_info);
 
     }

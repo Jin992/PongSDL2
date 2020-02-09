@@ -30,28 +30,28 @@ namespace Engine {
             btn->setOnKeyPressUp_hdl(up);
             btn->setOnKeyPressDown_hdl(down);
             _buttons.push_back({name, btn});
-            if (_buttons[_active_index].second->color() != 0x4c4cff)
-                _buttons[_active_index].second->color(0x4c4cff);
+            if (_buttons[_active_index].second->color() != _active_color)
+                _buttons[_active_index].second->color(_active_color);
         }
 
         void Menu::nextIndex() {
             // change color of current item to default
-            _buttons[_active_index].second->color(-1);
+            _buttons[_active_index].second->color(_color);
             // check if active index in vector range
             if (++_active_index  >= (int32_t)_buttons.size())
             _active_index = 0;
             // change color of next item to select color
-            _buttons[_active_index].second->color(0x4c4cff);
+            _buttons[_active_index].second->color(_active_color);
         }
 
         void Menu::prevIndex() {
             // change color of current item to default
-            _buttons[_active_index].second->color(-1);
+            _buttons[_active_index].second->color(_color);
             // check if active index in vector range
             if (--_active_index < 0)
                 _active_index = _buttons.size() - 1;
             // change color of previous item to select color
-            _buttons[_active_index].second->color(0x4c4cff);
+            _buttons[_active_index].second->color(_active_color);
 
         }
 
@@ -65,5 +65,13 @@ namespace Engine {
         }
 
         void Menu::update(double) {}
+
+        void Menu::set_active_color(int32_t color) {
+            _active_color = color;
+        }
+
+        void Menu::set_color(int32_t color) {
+            _color = color;
+        }
     };
 }

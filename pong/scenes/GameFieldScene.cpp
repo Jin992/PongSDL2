@@ -90,8 +90,8 @@ namespace PongGame {
     : _win_witdh(Engine::EngineData::EngineData::instance().window().width()),
       _win_height(Engine::EngineData::EngineData::instance().window().height()),
       _separator(std::make_shared<FieldSeparator>()),
-      _walls(std::make_shared<PongGame::Wall>(0, 0,  _win_witdh, c_wall_h, c_wall_color)),
-      _walls2(std::make_shared<PongGame::Wall>(0, _win_height-10, _win_witdh , c_wall_h, c_wall_color)),
+      _wall1(std::make_shared<PongGame::Wall>(0, 0,  _win_witdh, c_wall_h, c_wall_color)),
+      _wall2(std::make_shared<PongGame::Wall>(0, _win_height-10, _win_witdh , c_wall_h, c_wall_color)),
       _player_paddle(std::make_shared<PongGame::Paddle>(20, _win_height / 2 - c_paddle_w / 2, c_paddle_w, c_paddle_h, c_paddle_color)),
       _ai_paddle(std::make_shared<PongGame::Paddle>(_win_witdh - 40, _win_height /2 - c_paddle_w / 2,  c_paddle_w, c_paddle_h, c_paddle_color)),
       _ball(std::make_shared<PongGame::Ball>(_win_witdh /2, _win_height/2 - 12, c_ball_w, c_ball_h, c_ball_color)),
@@ -102,8 +102,8 @@ namespace PongGame {
         _separator->init(Engine::EngineData::EngineData::instance().window().width() / 2, 0, c_field_sep_w, c_field_sep_h, c_field_sep_padding);
         /// Add entities to scene
         add_entity(_separator);
-        add_entity(_walls);
-        add_entity(_walls2);
+        add_entity(_wall1);
+        add_entity(_wall2);
         add_entity(_player_paddle);
         add_entity(_ai_paddle);
         add_entity(_ball);
@@ -111,8 +111,8 @@ namespace PongGame {
         /// Set which of scene entities would be collidable
         _obstacles.push_back(_player_paddle);
         _obstacles.push_back(_ai_paddle);
-        _obstacles.push_back(_walls);
-        _obstacles.push_back(_walls2);
+        _obstacles.push_back(_wall1);
+        _obstacles.push_back(_wall2);
     }
 
     /// Very simple ai logic
