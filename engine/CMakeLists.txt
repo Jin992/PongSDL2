@@ -11,7 +11,7 @@ find_package(SDL2_ttf REQUIRED)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_library(engine
+add_library(${PROJECT_NAME}
         src/Button.cpp
         src/Engine.cpp
         src/EngineBuilder.cpp
@@ -26,4 +26,4 @@ add_library(engine
         src/UIEntity.cpp
         src/Window.cpp)
 
-target_link_libraries(engine SDL2::Main SDL2::TTF)
+target_link_libraries(${PROJECT_NAME} SDL2::Main SDL2::TTF)

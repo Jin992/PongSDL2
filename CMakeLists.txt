@@ -10,7 +10,7 @@ include_directories(${CMAKE_CURRENT_LIST_DIR})
 include_directories(${PROJECT_SOURCE_DIR}/pong)
 
 add_subdirectory(engine)
-add_executable(PongSDL2 main.cpp
+add_executable(${PROJECT_NAME} main.cpp
                         pong/scenes/MainMenuScene.cpp
                         pong/scenes/GameFieldScene.cpp
                         pong/static/FieldSeparator.cpp
