@@ -12,7 +12,7 @@ namespace Engine {
     class IRendererObject {
     public:
         virtual void render(Renderer::engine_renderer &) = 0;
-        virtual void update() {}
+        virtual void update(double) {}
         virtual ~IRendererObject() = default;
     };
 }

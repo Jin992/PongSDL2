@@ -19,7 +19,7 @@ namespace PongGame {
 
     }
 
-    void CreditScene::sceneEvent(SDL_Event &ev) {
+    void CreditScene::sceneEvent(SDL_Event &ev, double) {
         for_each_entity([&ev](Engine::entity::engine_entity_ptr entity) {
             if (entity->type() != Engine::entity::Pressable) {}
             if(ev.type == SDL_KEYDOWN) {
@@ -41,5 +41,5 @@ namespace PongGame {
         });
     }
 
-    void CreditScene::update() {}
+    void CreditScene::update(double) {}
 }

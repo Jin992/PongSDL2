@@ -28,7 +28,7 @@ namespace Engine {
             _color = color;
         }
 
-        void Rectangle::update() {}
+        void Rectangle::update(double) {}
 
         int32_t Rectangle::color() const {
             return _color;

@@ -5,7 +5,6 @@
 
 #include "TTFFont.h"
 #include <core/EngineData.h>
-#include <iostream>
 
 namespace Engine {
     namespace Font {

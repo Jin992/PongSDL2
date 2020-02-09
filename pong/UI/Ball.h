@@ -15,7 +15,7 @@ class Ball: public Engine::ui::Rectangle{
         void spawn_point(int32_t x, int32_t y);
         void respawn();
         void set_xspeed(double speed);
-        void accelerate();
+        void accelerate(double);
         void changeXdirection();
         void changeYdirection();
         void setXspeed(double val);

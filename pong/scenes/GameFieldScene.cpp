@@ -5,9 +5,10 @@
 #include <iostream>
 #include <zconf.h>
 #include "GameFieldScene.h"
+#include "../config/config.h"
 
 namespace PongGame {
-    void GameFieldScene::sceneEvent(SDL_Event &ev) {
+    void GameFieldScene::sceneEvent(SDL_Event &ev, double) {
         for_each_entity([&ev, this](Engine::entity::engine_entity_ptr entity) {
             if (entity->type() != Engine::entity::Pressable) {}
             if(ev.type == SDL_KEYDOWN) {
@@ -42,10 +43,10 @@ namespace PongGame {
         }
     }
 
-    void GameFieldScene::update() {
+    void GameFieldScene::update(double elapsed) {
         static std::shared_ptr<Engine::entity::Entity> prev_obstacle;
         // launch ai
-        _ai(_ball, _ai_paddle);
+        _ai(_ball, _ai_paddle, elapsed);
         // calculate ball collisions
         auto obstacle = _calculateCollision(_ball);
         if (obstacle != nullptr) {
@@ -81,7 +82,7 @@ namespace PongGame {
         }
 
         prev_obstacle = obstacle;
-        _ball->accelerate();
+        _ball->accelerate(elapsed);
     }
 
     GameFieldScene::GameFieldScene()
@@ -89,16 +90,16 @@ namespace PongGame {
     : _win_witdh(Engine::EngineData::EngineData::instance().window().width()),
       _win_height(Engine::EngineData::EngineData::instance().window().height()),
       _separator(std::make_shared<FieldSeparator>()),
-      _walls(std::make_shared<PongGame::Wall>(0, 0,  _win_witdh, 10, 0Xfffffff)),
-      _walls2(std::make_shared<PongGame::Wall>(0, _win_height-10, _win_witdh , 10, 0Xfffffff)),
-      _player_paddle(std::make_shared<PongGame::Paddle>(20, _win_height / 2 - 60, 20, 120,0Xfffffff)),
-      _ai_paddle(std::make_shared<PongGame::Paddle>(_win_witdh - 40, _win_height /2 - 60, 20, 120,0Xfffffff)),
-      _ball(std::make_shared<PongGame::Ball>(_win_witdh /2, _win_height/2 - 12, 25, 25, 0xffffffff)),
+      _walls(std::make_shared<PongGame::Wall>(0, 0,  _win_witdh, c_wall_h, c_wall_color)),
+      _walls2(std::make_shared<PongGame::Wall>(0, _win_height-10, _win_witdh , c_wall_h, c_wall_color)),
+      _player_paddle(std::make_shared<PongGame::Paddle>(20, _win_height / 2 - c_paddle_w / 2, c_paddle_w, c_paddle_h, c_paddle_color)),
+      _ai_paddle(std::make_shared<PongGame::Paddle>(_win_witdh - 40, _win_height /2 - c_paddle_w / 2,  c_paddle_w, c_paddle_h, c_paddle_color)),
+      _ball(std::make_shared<PongGame::Ball>(_win_witdh /2, _win_height/2 - 12, c_ball_w, c_ball_h, c_ball_color)),
       _score_manager(std::make_shared<ScoreManager>()),
      _terminate_game(0)
     {
-        _separator->setColor(0xffffffff);
-        _separator->init(Engine::EngineData::EngineData::instance().window().width() / 2, 0, 6, 24, 20);
+        _separator->setColor(c_field_sep_color);
+        _separator->init(Engine::EngineData::EngineData::instance().window().width() / 2, 0, c_field_sep_w, c_field_sep_h, c_field_sep_padding);
         /// Add entities to scene
         add_entity(_separator);
         add_entity(_walls);
@@ -115,25 +116,23 @@ namespace PongGame {
     }
 
     /// Very simple ai logic
-    void  GameFieldScene::_ai(std::shared_ptr<Ball> ball, std::shared_ptr<Paddle> paddle) {
+    void  GameFieldScene::_ai(std::shared_ptr<Ball> ball, std::shared_ptr<Paddle> paddle, double elapsed) {
+        if (ball->xSpeed() < 0) return;
         std::mt19937 gen(time(0));
-        std::uniform_int_distribution<int> distribution(1,200);
-        constexpr  int32_t  paddle_speed = 1;
+        std::uniform_int_distribution<int> distribution(1,10);
 
-        if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 2 == 0 && paddle->x() - ball->x() < 120) {  // If the ball is below the center of the paddle
-            paddle->set_y(paddle->y() + paddle_speed);                      // Move downwards
-        } else if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 3 == 0 && paddle->x() - ball->x() < 200) {  // If the ball is below the center of the paddle
-            paddle->set_y(paddle->y() + paddle_speed);                      // Move downwards
-        } else if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 7 == 0 && paddle->x() - ball->x() < 300) {  // If the ball is below the center of the paddle
-            paddle->set_y(paddle->y() + paddle_speed);                      // Move downwards
-        }
-        else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 2== 0 && paddle->x() - ball->x() < 120) {  // If the ball is above the center of the paddle
-            paddle->set_y(paddle->y() - paddle_speed);                          // Move upwards
-        } else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 3 == 0 && paddle->x() - ball->x() < 200) {  // If the ball is above the center of the paddle
-            paddle->set_y(paddle->y() - paddle_speed);                          // Move upwards
-        } else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 7 == 0 && paddle->x() - ball->x() < 300) {  // If the ball is below the center of the paddle
-            paddle->set_y(paddle->y() - paddle_speed);                      // Move downwards
-        }
+        if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 2 == 0 && paddle->x() - ball->x() < 300)  // If the ball is below the center of the paddle
+            paddle->moveDown(elapsed);
+        else if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 3 == 0 && paddle->x() - ball->x() < 350)  // If the ball is below the center of the paddle
+            paddle->moveDown(elapsed);
+        else if (ball->y() > paddle->y() + paddle->h() / 2 && distribution(gen) % 7 == 0 && paddle->x() - ball->x() < 400)  // If the ball is below the center of the paddle
+            paddle->moveDown(elapsed);
+        else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 2== 0 && paddle->x() - ball->x() < 300)  // If the ball is above the center of the paddle
+            paddle->moveUp(elapsed);
+        else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 3 == 0 && paddle->x() - ball->x() < 350)  // If the ball is above the center of the paddle
+            paddle->moveUp(elapsed);
+        else if (ball->y() < paddle->y() + paddle->h() / 2 && distribution(gen) % 7 == 0 && paddle->x() - ball->x() < 400)  // If the ball is below the center of the paddle
+            paddle->moveUp(elapsed);
     }
     /// Collision manager. calculate collisions
     std::shared_ptr<Engine::entity::Entity>  GameFieldScene::_calculateCollision(std::shared_ptr<Engine::entity::Entity> tracked_obj) {

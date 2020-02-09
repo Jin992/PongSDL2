@@ -18,7 +18,7 @@ namespace Engine {
             Rectangle(int32_t x, int32_t y, int32_t w, int32_t h, int32_t color);
             void render(Renderer::engine_renderer &renderer) override;
             void init(int32_t x, int32_t y, int32_t w, int32_t h, int32_t color);
-            void update() override;
+            void update(double) override;
             int32_t color() const;
             void color(int32_t color);
 

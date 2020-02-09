@@ -14,7 +14,7 @@ class FieldSeparator: public Engine::entity::Entity {
         void setColor(int32_t color);
         void init(int32_t x, int32_t y, int32_t w, int32_t h,  int32_t padding);
         void render(Engine::Renderer::engine_renderer &renderer) override;
-        void update() override {}
+        void update(double) override {}
 
     private:
         std::vector<std::shared_ptr<Engine::ui::Rectangle>> _separator;

@@ -24,7 +24,7 @@ namespace Engine {
         void    prevIndex();
         std::shared_ptr<Button>selected();
         void    render(Renderer::engine_renderer &renderer) override;
-        void    update() override;
+        void    update(double) override;
 
     private:
         std::vector<std::pair<std::string, std::shared_ptr<Button>>> _buttons;

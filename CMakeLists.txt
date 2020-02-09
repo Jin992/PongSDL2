@@ -12,6 +12,7 @@ find_package(SDL2_ttf REQUIRED)
 #find_package(SDL2_mixer REQUIRED)
 
 include_directories(${PROJECT_SOURCE_DIR}/engine)
+include_directories(${PROJECT_SOURCE_DIR}/pong)
 
 add_executable(PongSDL2 main.cpp
                         engine/core/Engine.cpp
@@ -34,7 +35,7 @@ add_executable(PongSDL2 main.cpp
         pong/UI/Paddle.cpp
         pong/UI/Ball.cpp
          pong/UI/wall.cpp
-        pong/UI/ScoreManager.cpp pong/UI/ScoreManager.h pong/scenes/CreditScene.cpp pong/scenes/CreditScene.h)
+        pong/UI/ScoreManager.cpp pong/UI/ScoreManager.h pong/scenes/CreditScene.cpp pong/scenes/CreditScene.h pong/config/config.h)
 
 #string trailing whitespaces
 target_link_libraries(PongSDL2 SDL2::Main SDL2::TTF )#SDL2::Image SDL2::Mixer)

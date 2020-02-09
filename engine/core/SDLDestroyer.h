@@ -21,7 +21,7 @@ namespace Engine {
 
         void operator()(_TTF_Font *ptr) const {
             TTF_CloseFont(ptr);
-            TTF_Quit();
+            //TTF_Quit();
         }
 
         void operator() (SDL_Surface *ptr) const {

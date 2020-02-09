@@ -34,7 +34,7 @@ namespace PongGame {
         _score_ai_label->render(renderer);
     }
 
-    void ScoreManager::update() {}
+    void ScoreManager::update(double) {}
 
 
     int32_t ScoreManager::winner() {

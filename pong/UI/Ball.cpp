@@ -4,16 +4,16 @@
 
 #include <iostream>
 #include "Ball.h"
+#include <config/config.h>
 
 namespace PongGame {
-    Ball::Ball():_xspeed(15), _yspeed(15){
+    Ball::Ball():_xspeed(c_ball_x_speed), _yspeed(c_ball_y_speed) {
         type(Engine::entity::Collidable);
-        init(0, 0,0,0, 0xffffff);
+        init(0, 0,0,0, c_ball_color);
     }
 
     Ball::Ball(int32_t x, int32_t y, uint32_t w, int32_t h, uint32_t color)
-    : _xspeed(15), _yspeed(15), _spawn_x(x), _spawn_y(y)
-    {
+    : _xspeed(c_ball_x_speed), _yspeed(c_ball_y_speed), _spawn_x(x), _spawn_y(y) {
         type(Engine::entity::Collidable);
         init(x, y, w, h, color);
         _ball_x = x;
@@ -34,9 +34,9 @@ void Ball::set_xspeed(double speed) {
     _xspeed = speed;
 }
 
-void Ball::accelerate() {
-    _ball_x += _xspeed * (1.0 / 60.0);
-    _ball_y += _yspeed * (1.0 / 60.0);
+void Ball::accelerate(double elapsed) {
+    _ball_x += _xspeed * elapsed;
+    _ball_y += _yspeed * elapsed;
     set_x(_ball_x);
     set_y(_ball_y);
 }

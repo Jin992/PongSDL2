@@ -20,8 +20,8 @@ namespace PongGame {
     public:
         MainMenuScene();
         void render(Engine::Renderer::engine_renderer &) override;
-        void sceneEvent(SDL_Event &ev) override;
-        void update() override ;
+        void sceneEvent(SDL_Event &ev, double) override;
+        void update(double) override ;
 
         ~MainMenuScene() = default;
 

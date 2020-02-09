@@ -13,13 +13,15 @@ namespace PongGame {
     public:
         Paddle();
         Paddle(int32_t x, int32_t y, uint32_t w, int32_t h, uint32_t color);
+        void moveUp(double elapsed);
+        void moveDown(double elapsed);
         void moveUp();
         void moveDown();
 
         private:
-        int32_t _scene_height;
+            int32_t _scene_height;
+            double  _cur_pos;
     };
 }
-
 
 #endif //PONGSDL2_PADDLE_H

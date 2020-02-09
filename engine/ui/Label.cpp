@@ -51,7 +51,7 @@ namespace Engine {
             _reinit();
         }
 
-        void Label::update() {}
+        void Label::update(double) {}
 
         void Label::_reinit() {
             _texture = createText(_text, _color);

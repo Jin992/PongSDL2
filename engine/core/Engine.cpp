@@ -9,6 +9,9 @@
 #include <chrono>
 
 namespace Engine {
+
+#define FPS 1.0/60.0
+
     void Engine::run() {
         // Error handler
         Error::EngineError err;
@@ -20,9 +23,15 @@ namespace Engine {
 
         // Turn on engine
         data.engine_status(true);
+        auto previous = std::chrono::system_clock::now();
 
+        double totalElapsed = 0.0f;
         // Start main game loop
         while (data.engine_status()) {
+            auto current = std::chrono::system_clock::now();
+            auto elapsed =  std::chrono::duration<double>(current - previous).count();
+            previous = current;
+
             // Check for input events
             while (SDL_PollEvent(&event) != 0) {
                 switch (event.type) {
@@ -31,23 +40,26 @@ namespace Engine {
                         break;
                         // Process key press event
                         case SDL_KEYDOWN:
-
-                            data.sceneManager().current_scene()->sceneEvent(event);
+                            data.sceneManager().current_scene()->sceneEvent(event, elapsed);
                             break;
 
                         default:
                             break;
                 }
+                // update scene
             }
-            // update scene
-            data.sceneManager().current_scene()->update();
-            // render scene
-            // Clear window
+            data.sceneManager().current_scene()->update(elapsed);
+            totalElapsed += elapsed;
 
-            SDL_SetRenderDrawColor(data.renderer().get().get(), 0x0, 0x0, 0x0, SDL_ALPHA_OPAQUE);
-            SDL_RenderClear(data.renderer().get().get());
-            data.sceneManager().current_scene()->render(data.renderer().get());
-            SDL_RenderPresent(data.renderer().get().get());
+            if(totalElapsed > FPS) {
+                // render scene
+                // Clear window
+                SDL_SetRenderDrawColor(data.renderer().get().get(), 0x0, 0x0, 0x0, SDL_ALPHA_OPAQUE);
+                SDL_RenderClear(data.renderer().get().get());
+                data.sceneManager().current_scene()->render(data.renderer().get());
+                SDL_RenderPresent(data.renderer().get().get());
+                totalElapsed -= FPS;
+            }
         }
     }
 }

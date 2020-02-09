@@ -17,7 +17,7 @@ public:
     void increase_ai_score();
     void all_scores_to_zero();
     void render(Engine::Renderer::engine_renderer &renderer) override;
-    void update() override;
+    void update(double) override;
     int32_t winner();
 
 private:

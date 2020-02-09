@@ -64,6 +64,6 @@ namespace Engine {
                 it.second->render(renderer);
         }
 
-        void Menu::update() {}
+        void Menu::update(double) {}
     };
 }

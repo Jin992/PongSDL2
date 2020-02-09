@@ -22,11 +22,11 @@ class GameFieldScene: public Engine::Scene::Scene {
 public:
     GameFieldScene();
     void render(Engine::Renderer::engine_renderer &) override;
-    void sceneEvent(SDL_Event &ev) override;
-    void update() override ;
+    void sceneEvent(SDL_Event &ev, double) override;
+    void update(double) override ;
 
 private:
-    void _ai(std::shared_ptr<Ball> ball, std::shared_ptr<Paddle> paddle);
+    void _ai(std::shared_ptr<Ball>, std::shared_ptr<Paddle>, double);
     std::shared_ptr<Engine::entity::Entity> _calculateCollision(std::shared_ptr<Engine::entity::Entity> tracked_obj);
 
 private:

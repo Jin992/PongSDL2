@@ -43,7 +43,7 @@ namespace PongGame {
         add_entity(_menu);
     }
 
-    void MainMenuScene::sceneEvent(SDL_Event &ev) {
+    void MainMenuScene::sceneEvent(SDL_Event &ev, double) {
 
         for_each_entity([&ev, this](Engine::entity::engine_entity_ptr entity){
 
@@ -75,7 +75,7 @@ namespace PongGame {
         });
     }
 
-    void MainMenuScene::update() {
+    void MainMenuScene::update(double) {
 
     }
 }

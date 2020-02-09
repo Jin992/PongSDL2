@@ -15,7 +15,7 @@ namespace Engine {
             Label();
             Label(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
             void            init(std::string const &btn_text, int32_t color, int32_t x, int32_t y);
-            void            update() override;
+            void            update(double) override;
             void            color(int32_t new_color);
             int32_t         color() const;
 
