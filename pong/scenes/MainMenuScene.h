@@ -6,13 +6,11 @@
 #define PONGSDL2_MAINMENUSCENE_H
 
 #include <SDL_render.h>
-#include "scene/Scene.h"
-#include <TTFFont.h>
-#include <renderer/Renderer.h>
-#include "ui/Menu.h"
-#include <ui/Rectangle.h>
-#include <iostream>
-
+#include "engine/include/Scene.h"
+#include <engine/include/TTFFont.h>
+#include <engine/include/Renderer.h>
+#include "engine/include/Menu.h"
+#include <engine/include/Rectangle.h>
 
 namespace PongGame {
 

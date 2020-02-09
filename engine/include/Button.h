@@ -6,7 +6,7 @@
 #define PONGSDL2_BUTTON_H
 
 #include "Label.h"
-#include <iface/IPressObject.h>
+#include "IPressObject.h"
 
 namespace Engine {
     namespace ui {

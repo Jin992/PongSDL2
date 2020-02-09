@@ -5,8 +5,8 @@
 #ifndef PONGSDL2_CREDITSCENE_H
 #define PONGSDL2_CREDITSCENE_H
 
-#include <scene/Scene.h>
-#include <ui/Label.h>
+#include <engine/include/Scene.h>
+#include <engine/include/Label.h>
 
 namespace PongGame {
     class CreditScene: public Engine::Scene::Scene  {

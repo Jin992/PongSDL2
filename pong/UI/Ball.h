@@ -5,7 +5,7 @@
 #ifndef PONGSDL2_BALL_H
 #define PONGSDL2_BALL_H
 
-#include <ui/Rectangle.h>
+#include <engine/include/Rectangle.h>
 
 namespace PongGame {
 class Ball: public Engine::ui::Rectangle{

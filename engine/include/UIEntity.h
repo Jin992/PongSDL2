@@ -6,9 +6,9 @@
 #define PONGSDL2_UIENTITY_H
 
 
-#include <core/EngineData.h>
-#include <entity/Entity.h>
-#include <TTFFont.h>
+#include "EngineData.h"
+#include "Entity.h"
+#include "TTFFont.h"
 
 namespace Engine {
     namespace ui {

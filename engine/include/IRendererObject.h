@@ -6,7 +6,7 @@
 #define PONGSDL2_IRENDEREROBJECT_H
 
 #include <memory>
-#include <renderer/Renderer.h>
+#include "Renderer.h"
 
 namespace Engine {
     class IRendererObject {

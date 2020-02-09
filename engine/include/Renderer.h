@@ -5,7 +5,7 @@
 #ifndef PONGSDL2_RENDERER_H
 #define PONGSDL2_RENDERER_H
 
-#include <core/SDLDestroyer.h>
+#include "SDLDestroyer.h"
 #include <memory>
 
 struct SDL_Renderer;

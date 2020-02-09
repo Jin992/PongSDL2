@@ -5,8 +5,8 @@
 #ifndef PONGSDL2_ENTITY_H
 #define PONGSDL2_ENTITY_H
 
-#include "../iface/IRendererObject.h"
-#include <renderer/Renderer.h>
+#include "IRendererObject.h"
+#include "Renderer.h"
 #include <memory>
 
 

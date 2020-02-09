@@ -1,9 +1,10 @@
 //#include "SDL.h"
-#include <core/Engine.h>
-#include <core/EngineBuilder.h>
+#include <engine/include/Engine.h>
+#include <engine/include/EngineBuilder.h>
 #include "pong/scenes/MainMenuScene.h"
-#include "pong/scenes/GameFieldScene.h"
 #include "pong/scenes/CreditScene.h"
+#include "pong/scenes/GameFieldScene.h"
+
 
 int main()
 {

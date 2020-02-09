@@ -5,14 +5,14 @@
 #ifndef PONGSDL2_GAMEFIELDSCENE_H
 #define PONGSDL2_GAMEFIELDSCENE_H
 
-#include <scene/Scene.h>
+#include <engine/include/Scene.h>
 #include "../static/FieldSeparator.h"
 #include "../UI/wall.h"
 #include "../UI/Paddle.h"
 #include "../UI/Ball.h"
-#include <core/EngineData.h>
-#include <entity/Entity.h>
-#include <ui/Label.h>
+#include <engine/include/EngineData.h>
+#include <engine/include/Entity.h>
+#include <engine/include/Label.h>
 #include <list>
 #include <random>
 #include "../UI/ScoreManager.h"

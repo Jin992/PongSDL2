@@ -6,9 +6,9 @@
 #define PONGSDL2_SCENE_H
 
 #include <memory>
-#include <iface/IRendererObject.h>
-#include <renderer/Renderer.h>
-#include <entity/Entity.h>
+#include "IRendererObject.h"
+#include "Renderer.h"
+#include "Entity.h"
 #include <vector>
 
 

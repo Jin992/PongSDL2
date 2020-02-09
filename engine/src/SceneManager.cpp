@@ -2,15 +2,13 @@
 // Created by jin on 2/1/20.
 //
 
-#include <iostream>
-#include "SceneManager.h"
+#include <SceneManager.h>
 
 namespace Engine {
     namespace Scene {
         SceneManager::SceneManager() : _init_scene(false) {}
 
         void SceneManager::startup_scene(const std::string &scene_name) {
-            std::cout << "Scenes" << _scenes.size() << std::endl;
             load_scene(scene_name);
             _init_scene = true;
         }

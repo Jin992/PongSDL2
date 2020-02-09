@@ -5,7 +5,7 @@
 #ifndef PONGSDL2_WALL_H
 #define PONGSDL2_WALL_H
 
-#include <ui/Rectangle.h>
+#include <engine/include/Rectangle.h>
 
 namespace PongGame {
 class Wall: public Engine::ui::Rectangle {

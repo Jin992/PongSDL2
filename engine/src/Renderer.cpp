@@ -2,8 +2,8 @@
 // Created by jin on 2/1/20.
 //
 
-#include "Renderer.h"
-#include <window/Window.h>
+#include <Renderer.h>
+#include <Window.h>
 
 namespace Engine {
     namespace Renderer {

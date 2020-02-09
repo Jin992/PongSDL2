@@ -2,7 +2,7 @@
 // Created by jin on 2/3/20.
 //
 
-#include "Label.h"
+#include <Label.h>
 
 namespace Engine {
     namespace ui {

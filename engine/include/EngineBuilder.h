@@ -6,7 +6,7 @@
 #define PONGSDL2_ENGINEBUILDER_H
 
 #include <string>
-#include <core/EngineData.h>
+#include "EngineData.h"
 
 namespace Engine {
     namespace Builder {

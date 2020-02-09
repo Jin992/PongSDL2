@@ -3,8 +3,8 @@
 //
 
 
-#include "TTFFont.h"
-#include <core/EngineData.h>
+#include <TTFFont.h>
+#include <EngineData.h>
 
 namespace Engine {
     namespace Font {

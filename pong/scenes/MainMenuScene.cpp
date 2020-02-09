@@ -3,7 +3,7 @@
 //
 
 #include <SDL_events.h>
-#include <core/EngineData.h>
+#include <engine/include/EngineData.h>
 #include "MainMenuScene.h"
 #include <iostream>
 #include <config/config.h>

@@ -6,7 +6,7 @@
 #define PONGSDL2_TTFFONT_H
 
 #include <memory>
-#include <core/SDLDestroyer.h>
+#include "SDLDestroyer.h"
 
 struct _TTF_Font;
 

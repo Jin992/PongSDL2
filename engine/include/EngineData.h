@@ -6,11 +6,11 @@
 #define PONGSDL2_ENGINEDATA_H
 
 #include <memory>
-#include <core/SDLDestroyer.h>
-#include <scene/SceneManager.h>
-#include <window/Window.h>
-#include <renderer/Renderer.h>
-#include <TTFFont.h>
+#include "SDLDestroyer.h"
+#include "SceneManager.h"
+#include "Window.h"
+#include "Renderer.h"
+#include "TTFFont.h"
 
 
 namespace Engine {

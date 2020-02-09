@@ -4,7 +4,8 @@
 
 #ifndef PONGSDL2_FIELDSEPARATOR_H
 #define PONGSDL2_FIELDSEPARATOR_H
-#include <ui/Rectangle.h>
+
+#include "engine/include/Rectangle.h"
 #include <memory>
 #include <vector>
 

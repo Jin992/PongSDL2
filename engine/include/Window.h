@@ -6,7 +6,7 @@
 #define PONGSDL2_WINDOW_H
 
 #include <string>
-#include <core/SDLDestroyer.h>
+#include "SDLDestroyer.h"
 #include <memory>
 
 struct SDL_Window;

@@ -5,8 +5,8 @@
 #ifndef PONGSDL2_SCOREMANAGER_H
 #define PONGSDL2_SCOREMANAGER_H
 
-#include <entity/Entity.h>
-#include <ui/Label.h>
+#include <engine/include/Entity.h>
+#include <engine/include/Label.h>
 #include <iostream>
 
 namespace PongGame {

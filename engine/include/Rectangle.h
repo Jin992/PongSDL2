@@ -5,8 +5,8 @@
 #ifndef PONGSDL2_RECTANGLE_H
 #define PONGSDL2_RECTANGLE_H
 
-#include <entity/Entity.h>
-#include <iface/IPressObject.h>
+#include "Entity.h"
+#include "IPressObject.h"
 #include "UIEntity.h"
 #include <SDL2/SDL_rect.h>
 

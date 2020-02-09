@@ -5,7 +5,7 @@
 #ifndef PONGSDL2_PADDLE_H
 #define PONGSDL2_PADDLE_H
 
-#include <ui/Rectangle.h>
+#include <engine/include/Rectangle.h>
 #include <iostream>
 
 namespace PongGame {

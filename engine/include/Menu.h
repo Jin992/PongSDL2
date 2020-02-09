@@ -5,9 +5,9 @@
 #ifndef PONGSDL2_MENU_H
 #define PONGSDL2_MENU_H
 
-#include <ui/Button.h>
-#include <iface/IRendererObject.h>
-#include <iface/IPressObject.h>
+#include "Button.h"
+#include "IRendererObject.h"
+#include "IPressObject.h"
 #include <memory>
 
 namespace Engine {

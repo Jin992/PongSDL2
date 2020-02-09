@@ -5,7 +5,8 @@
 #ifndef PONGSDL2_LABEL_H
 #define PONGSDL2_LABEL_H
 
-#include <ui/UIEntity.h>
+#include "UIEntity.h"
+
 
 namespace Engine {
     namespace ui {
